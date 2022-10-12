@@ -1,0 +1,27 @@
+<mat-sidenav-container fullscreen >
+
+  <mat-sidenav #sidenav mode="side" opened>
+
+    <app-sidenav></app-sidenav>
+
+  </mat-sidenav>
+
+  <mat-toolbar class="bg-blue">
+    <button (click)="sidenav.toggle()" mat-icon-button >
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <span class="spacer"></span>
+
+    <span>usuario</span>
+    
+    <button (click)="logout()" mat-button>Logout</button>
+    
+     
+  </mat-toolbar>
+
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+
+</mat-sidenav-container>

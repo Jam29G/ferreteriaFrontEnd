@@ -1,0 +1,60 @@
+.submenu-hidden {
+  max-height: 0px;
+}
+
+.submenu-show {
+  max-height: 500px;
+}
+
+.submenu-container {
+  overflow-y: hidden;
+  transition: max-height 300ms ease-in-out;
+}
+
+.user-container {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-color:#ccc;
+}
+
+.logo-sidebar {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.submenu-container {
+  overflow-y: hidden;
+  padding-top: 0;
+}
+
+.submenu {
+  padding-left: 1rem !important;
+}
+
+.submenu-bg {
+  background-color: #ececec;
+}
+
+.submenu-close {
+  max-height: 0px !important;
+}
+
+.submenu-open {
+  max-height: 500px !important;
+}
+
+.right-icon {
+  margin-left: 1rem;
+  transition: transform ease-out 200ms;
+}
+
+.downIcon {
+  transform: rotate(-90deg);
+}

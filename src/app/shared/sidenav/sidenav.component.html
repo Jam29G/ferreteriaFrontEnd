@@ -1,0 +1,97 @@
+<mat-toolbar color="primary">
+  <span>Ferreteria Mi Casita</span>
+</mat-toolbar>
+
+<div class=" user-container">
+  <!--
+  <img src="https://randomuser.me/api/portraits/men/11.jpg" class="logo-sidebar">
+  -->
+
+  <span>Jhon Doe - Administrador</span>
+</div>
+
+<div *ngFor="let item of menuItems">
+  <!--inicio del deplegable-->
+  <!--item que despliega-->
+  <mat-nav-list>
+
+    <a *ngIf="item.children != undefined" mat-list-item (click)="desplegar(item.id, item.id + 'Icon')">
+      <mat-icon mat-list-icon>{{item.icon}}</mat-icon>
+      <span>{{item.label}}</span>
+      <mat-icon [id]="item.id + 'Icon'" class="right-icon">keyboard_arrow_left</mat-icon>
+    </a>
+
+    <a *ngIf="item.children == undefined" [routerLink]="item.link" mat-list-item>
+      <mat-icon mat-list-icon>{{item.icon}}</mat-icon>
+      <span>{{item.label}}</span>
+    </a>
+
+  </mat-nav-list>
+  <!--fin item que despliega-->
+
+  <!--Inicio del submenu-->
+
+  <div *ngIf="item.children != undefined">
+    <mat-nav-list [id]="item.id" class="submenu-container submenu-bg submenu-close" >
+
+      <mat-list-item *ngFor="let child of item.children" class="submenu">
+        <mat-icon mat-list-icon>{{child.icon}}</mat-icon>
+        <a [routerLink]="child.link" >
+          <span>{{child.label}}</span>
+        </a>
+      </mat-list-item>
+  
+    </mat-nav-list>
+  </div>
+
+  <!--Final del submenu-->
+  <!--fin del deplegable-->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div>
+  inicio del deplegable
+  item que despliega
+  <mat-nav-list>
+    <a mat-list-item (click)="desplegar('usuarios', 'usuariosIcon')">
+      <mat-icon mat-list-icon>person</mat-icon>
+      <span>Usuarios</span>
+      <mat-icon id="usuariosIcon" class="right-icon">keyboard_arrow_left</mat-icon>
+    </a>
+  </mat-nav-list>
+  fin item que despliega
+
+  Inicio del submenu
+  <mat-nav-list id="usuarios" class="submenu-container submenu-bg submenu-close" >
+
+    <mat-list-item class="submenu">
+      <mat-icon mat-list-icon>label</mat-icon>
+      <a >
+        <span>Recurso 1</span>
+      </a>
+    </mat-list-item>
+
+    <mat-list-item class="submenu">
+      <mat-icon mat-list-icon>label</mat-icon>
+      <a>Recurso 2</a>
+    </mat-list-item>
+
+  </mat-nav-list>
+  Final del submenu
+  fin del deplegable
+</div> -->
