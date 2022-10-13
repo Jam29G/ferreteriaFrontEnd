@@ -18,8 +18,18 @@ const routes: Routes = [
   {
     path: "cajas",
     loadChildren: () => import('./cajas/cajas.module').then(m => m.CajasModule),
-    canActivate: [AuthRequiredGuard, AuthGerenteGuard],
-    canLoad: [AuthRequiredGuard, AuthGerenteGuard]
+    canActivate: [AuthRequiredGuard],
+    canLoad: [AuthRequiredGuard]
+  },
+  {
+    path: "usuarios",
+    loadChildren: () => import('./usuarios/usuarios.module').then(m => m.UsuariosModule),
+    canActivate: [AuthRequiredGuard],
+    canLoad: [AuthRequiredGuard]
+  },
+  {
+    path: '**',
+    redirectTo: ''
   }
 ];
 

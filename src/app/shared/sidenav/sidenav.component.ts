@@ -35,9 +35,9 @@ export class SidenavComponent implements OnInit {
       id: "usuarios",
       children: [
         {
-          label: "recurso 1",
+          label: "Administrar usuarios",
           icon: "label",
-          link: "/cajas/adm"
+          link: "/usuarios/adm"
         },
         {
           label: "recurso 2",
@@ -47,6 +47,19 @@ export class SidenavComponent implements OnInit {
       ]
       
     },
+    {
+      label: "Cajas",
+      icon: "payment",
+      link: "",
+      id: "cajas",
+      children: [
+        {
+          label: "Administrar cajas",
+          icon: "label",
+          link: "/cajas/adm"
+        },
+      ]
+    }
 
   ]
     
