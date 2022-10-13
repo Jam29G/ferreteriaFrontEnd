@@ -34,9 +34,9 @@
   <div *ngIf="item.children != undefined">
     <mat-nav-list [id]="item.id" class="submenu-container submenu-bg submenu-close" >
 
-      <mat-list-item *ngFor="let child of item.children" class="submenu">
+      <mat-list-item [routerLink]="child.link" *ngFor="let child of item.children" class="submenu">
         <mat-icon mat-list-icon>{{child.icon}}</mat-icon>
-        <a [routerLink]="child.link" >
+        <a>
           <span>{{child.label}}</span>
         </a>
       </mat-list-item>
