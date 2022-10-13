@@ -64,4 +64,8 @@ export class AuthService {
     return true;
   }
 
+  logout() {
+    this._auth = undefined;
+  }
+
 }
