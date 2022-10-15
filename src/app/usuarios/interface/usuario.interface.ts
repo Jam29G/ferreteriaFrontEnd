@@ -6,6 +6,7 @@ export interface Usuario {
   password: string;
   estado:   boolean;
   roles:    Role[];
+  rolstr?:   string;
 }
 
 export interface Role {

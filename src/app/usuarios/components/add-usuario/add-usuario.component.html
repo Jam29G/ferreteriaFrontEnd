@@ -1,0 +1,89 @@
+<h2>Crear un nuevo usuario</h2>
+<form [formGroup]="form" (ngSubmit)="submitForm()" class="w-full">
+
+  <div class="mb-3 mb-3 md:flex md:justify-content-between">
+
+    <div class="md:w-6 md:mr-2">
+      <mat-form-field class="w-full" appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input formControlName="nombre" type="text" matInput placeholder="Ingrese el nombre" required>
+  
+        <!-- <mat-error 
+          *ngIf="invalidField('username')"
+        >
+          {{usernameError}}
+        </mat-error> -->
+  
+      </mat-form-field>
+    </div>
+
+    <div class="md:w-6 md:mr-2">
+      <mat-form-field class="w-full" appearance="fill">
+        <mat-label>Apellido</mat-label>
+        <input formControlName="apellido" type="text" matInput placeholder="Ingrese el apellido" required>
+  
+        <!-- <mat-error 
+          *ngIf="invalidField('username')"
+        >
+          {{usernameError}}
+        </mat-error> -->
+  
+      </mat-form-field>
+    </div>
+
+  </div>
+
+  <div class="mb-3 md:flex md:justify-content-between">
+    
+    <div class="md:w-6 md:mr-2">
+      <mat-form-field class="w-full"  appearance="fill">
+        <mat-label>Username</mat-label>
+        <input formControlName="username" type="text" matInput placeholder="Ingrese el nombre de usuario" required>
+  
+        <!-- <mat-error 
+          *ngIf="invalidField('username')"
+        >
+          {{usernameError}}
+        </mat-error> -->
+  
+      </mat-form-field>
+    </div>
+
+    <div class="md:w-6">
+      <mat-form-field class="w-full"  appearance="fill">
+        <mat-label>Contraseña</mat-label>
+        <input formControlName="password" type="password" matInput placeholder="Ingrese la contraseña" required>
+  
+        <!-- <mat-error 
+          *ngIf="invalidField('username')"
+        >
+          {{usernameError}}
+        </mat-error> -->
+  
+      </mat-form-field>
+    </div>
+
+  </div>
+
+  <div class="mb-3">
+    <mat-form-field class="w-full" appearance="fill">
+      <mat-label>Rol</mat-label>
+      <mat-select formControlName="rol" required>
+        <mat-option
+          *ngFor="let rol of roles; let i = index"
+          [value]="rol.nombre"
+        >
+          {{roleConverter(rol.nombre)}}
+
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <button type="submit" mat-raised-button color="primary" class="mr-2 w-7rem">Guardar</button>
+    <button type="button" mat-raised-button class="w-7rem" color="warn">Cancelar</button>
+  </div>
+</form>
+
+

@@ -50,9 +50,17 @@ export class AuthService {
           authorities: payload.authorities
         }
 
+        localStorage.setItem("auth", JSON.stringify(this.auth));
+
       })
     )
 
+  }
+
+  verifySession() {
+    if(localStorage.getItem("auth") !== null) {
+      this._auth = JSON.parse(localStorage.getItem("auth")!);
+    }
   }
 
   verifyRol(findRol: string) {
@@ -66,6 +74,7 @@ export class AuthService {
 
   logout() {
     this._auth = undefined;
+    localStorage.removeItem("auth");
   }
 
 }

@@ -7,19 +7,23 @@ import { AdmUsuariosComponent } from './pages/adm-usuarios/adm-usuarios.componen
 import { MaterialModule } from '../material/material.module';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { AddUsuarioComponent } from './components/add-usuario/add-usuario.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     HomeUsuariosComponent,
-    AdmUsuariosComponent
+    AdmUsuariosComponent,
+    AddUsuarioComponent
   ],
   imports: [
     CommonModule,
     UsuariosRoutingModule,
     MaterialModule,
     RouterModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class UsuariosModule { }

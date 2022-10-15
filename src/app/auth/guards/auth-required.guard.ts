@@ -18,8 +18,9 @@ export class AuthRequiredGuard implements CanActivate, CanLoad {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean   {
 
-    if(this.authService.auth === undefined) {
+    this.authService.verifySession();
 
+    if(this.authService.auth === undefined) {
 
       this.router.navigate(['./auth/login']);
       return false
@@ -30,6 +31,8 @@ export class AuthRequiredGuard implements CanActivate, CanLoad {
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
+
+    this.authService.verifySession();
     
     if(this.authService.auth === undefined) {
 
