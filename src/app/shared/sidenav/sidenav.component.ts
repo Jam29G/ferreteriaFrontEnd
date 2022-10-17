@@ -1,9 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { Role } from 'src/app/usuarios/interface/usuario.interface';
+import { UsuariosService } from '../../usuarios/services/usuarios.service';
+import { AuthService } from '../../auth/services/auth.service';
 
 interface menuChildren {
   label: string,
   icon: string,
   link: string,
+}
+
+interface UsuarioLogin {
+  nombre:   string;
+  apellido: string;
+  rolstr?:   string;
 }
 
 interface menu {
@@ -20,6 +29,8 @@ interface menu {
   styleUrls: ['./sidenav.component.css']
 })
 export class SidenavComponent implements OnInit {
+
+  usuario: UsuarioLogin | undefined;
 
   menuItems: menu[] = [
     {
@@ -64,9 +75,21 @@ export class SidenavComponent implements OnInit {
   ]
     
 
-  constructor() { }
+  constructor(
+    private usuarioService: UsuariosService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
+    this.usuarioService.getById(this.authService.auth?.id!).subscribe({
+      next: usuario => {
+        this.usuario = {
+          nombre: usuario.nombre,
+          apellido: usuario.apellido,
+          rolstr: this.roleConverter(usuario.roles)
+        }
+      }
+    })
   }
 
   
@@ -78,6 +101,18 @@ export class SidenavComponent implements OnInit {
     element?.classList.toggle("submenu-close");
 
     document.getElementById(idIcon)?.classList.toggle("downIcon");
+  }
+
+  roleConverter(roles: Role[]): string {
+
+    if(roles.findIndex( rol => rol.nombre === "ROLE_ADMIN" ) != -1) {
+      return "Administrador"
+    } else if(roles.findIndex( rol => rol.nombre === "ROLE_GERENTE") != -1) {
+      return "Gerente"
+    } else {
+      return "Cajero"
+    }
+
   }
   
 

@@ -9,13 +9,15 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { AddUsuarioComponent } from './components/add-usuario/add-usuario.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UpdateUsuarioComponent } from './components/update-usuario/update-usuario.component';
 
 
 @NgModule({
   declarations: [
     HomeUsuariosComponent,
     AdmUsuariosComponent,
-    AddUsuarioComponent
+    AddUsuarioComponent,
+    UpdateUsuarioComponent
   ],
   imports: [
     CommonModule,

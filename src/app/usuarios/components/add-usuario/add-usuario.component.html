@@ -6,13 +6,13 @@
     <div class="md:w-6 md:mr-2">
       <mat-form-field class="w-full" appearance="fill">
         <mat-label>Nombre</mat-label>
-        <input formControlName="nombre" type="text" matInput placeholder="Ingrese el nombre" required>
+        <input formControlName="nombre" type="text" matInput placeholder="Ingrese el nombre">
   
-        <!-- <mat-error 
-          *ngIf="invalidField('username')"
+        <mat-error 
+          *ngIf="invalidField('nombre')"
         >
-          {{usernameError}}
-        </mat-error> -->
+          {{nombreError}}
+        </mat-error>
   
       </mat-form-field>
     </div>
@@ -20,13 +20,13 @@
     <div class="md:w-6 md:mr-2">
       <mat-form-field class="w-full" appearance="fill">
         <mat-label>Apellido</mat-label>
-        <input formControlName="apellido" type="text" matInput placeholder="Ingrese el apellido" required>
+        <input formControlName="apellido" type="text" matInput placeholder="Ingrese el apellido">
   
-        <!-- <mat-error 
-          *ngIf="invalidField('username')"
+        <mat-error 
+          *ngIf="invalidField('apellido')"
         >
-          {{usernameError}}
-        </mat-error> -->
+          {{apellidoError}}
+        </mat-error>
   
       </mat-form-field>
     </div>
@@ -38,13 +38,13 @@
     <div class="md:w-6 md:mr-2">
       <mat-form-field class="w-full"  appearance="fill">
         <mat-label>Username</mat-label>
-        <input formControlName="username" type="text" matInput placeholder="Ingrese el nombre de usuario" required>
+        <input formControlName="username" type="text" matInput placeholder="Ingrese el nombre de usuario">
   
-        <!-- <mat-error 
+         <mat-error 
           *ngIf="invalidField('username')"
         >
           {{usernameError}}
-        </mat-error> -->
+        </mat-error>
   
       </mat-form-field>
     </div>
@@ -52,13 +52,13 @@
     <div class="md:w-6">
       <mat-form-field class="w-full"  appearance="fill">
         <mat-label>Contraseña</mat-label>
-        <input formControlName="password" type="password" matInput placeholder="Ingrese la contraseña" required>
+        <input formControlName="password" type="password" matInput placeholder="Ingrese la contraseña">
   
-        <!-- <mat-error 
-          *ngIf="invalidField('username')"
+        <mat-error 
+          *ngIf="invalidField('password')"
         >
-          {{usernameError}}
-        </mat-error> -->
+          {{passwordError}}
+        </mat-error>
   
       </mat-form-field>
     </div>
@@ -68,7 +68,7 @@
   <div class="mb-3">
     <mat-form-field class="w-full" appearance="fill">
       <mat-label>Rol</mat-label>
-      <mat-select formControlName="rol" required>
+      <mat-select formControlName="rol">
         <mat-option
           *ngFor="let rol of roles; let i = index"
           [value]="rol.nombre"
@@ -82,7 +82,7 @@
 
   <div>
     <button type="submit" mat-raised-button color="primary" class="mr-2 w-7rem">Guardar</button>
-    <button type="button" mat-raised-button class="w-7rem" color="warn">Cancelar</button>
+    <button type="button" (click)="close()" mat-raised-button class="w-7rem" color="warn">Cerrar</button>
   </div>
 </form>
 

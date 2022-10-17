@@ -1,0 +1,50 @@
+<h2>Editando al usuario: <b>{{usuario?.username}}</b></h2>
+
+<p>
+  nombre: <b>{{usuario?.nombre}}</b>
+</p>
+<p>
+  apellido: <b>{{usuario?.apellido}}</b>
+</p>
+<p>
+  username: <b>{{usuario?.username}}</b>
+</p>
+
+<form (ngSubmit)="submitForm()" [formGroup]="form" class="w-full" >
+  <div class="mb-3 md:flex md:justify-content-between">
+
+    <div class="md:w-6 md:mr-2">
+      <mat-form-field class="w-full"  appearance="fill">
+        <mat-label>Contraseña</mat-label>
+        <input formControlName="password" type="password" matInput placeholder="Ingrese la contraseña">
+  
+        <mat-error 
+          *ngIf="invalidField('password')"
+        >
+          {{passwordError}}
+        </mat-error>
+  
+      </mat-form-field>
+    </div>
+
+    <div class="md:w-6">
+      <mat-form-field class="w-full" appearance="fill">
+        <mat-label>Rol</mat-label>
+        <mat-select formControlName="rol">
+          <mat-option
+            *ngFor="let rol of roles; let i = index"
+            [value]="rol.nombre"
+          >
+            {{roleConverter(rol.nombre)}}
+  
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+  </div>
+  <div>
+    <button type="submit" mat-raised-button color="primary" class="mr-2 w-7rem">Guardar</button>
+    <button type="button" (click)="close()" mat-raised-button class="w-7rem" color="warn">Cerrar</button>
+  </div>
+</form>

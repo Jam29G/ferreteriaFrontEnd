@@ -31,4 +31,48 @@ export class UsuariosService {
 
   }
 
+  getById(id: number): Observable<Usuario> {
+    const url = `${this.base_url}/usuarios/id/${id}`;
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    })
+
+    return this.http.get<Usuario>(url, {headers});
+  }
+
+  update(id: number, usuario: Usuario): Observable<Usuario> {
+    const url = `${this.base_url}/usuarios/${id}`;
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    })
+
+    return this.http.put<Usuario>(url, usuario, {headers});
+  }
+
+  changeState(id: number, state: boolean): Observable<Usuario> {
+    const url = `${this.base_url}/usuarios/changeState/${id}?state=${state}`;
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    })
+
+    return this.http.put<Usuario>(url, undefined, {headers});
+  }
+
+  save(usuario: Usuario): Observable<Usuario> {
+
+    const url = `${this.base_url}/usuarios`;
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    })
+
+    return this.http.post<Usuario>(url, usuario, {headers});
+
+  }
+
+  
+
 }

@@ -5,7 +5,6 @@ import { MaterialModule } from '../material/material.module';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import { HomeSharedComponent } from './home-shared/home-shared.component';
 
 
 
@@ -14,7 +13,6 @@ import { HomeSharedComponent } from './home-shared/home-shared.component';
     SidenavComponent,
     HomeComponent,
     ToolbarComponent,
-    HomeSharedComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +23,6 @@ import { HomeSharedComponent } from './home-shared/home-shared.component';
     SidenavComponent,
     ToolbarComponent,
     HomeComponent,
-    HomeSharedComponent
   ]
 })
 export class SharedModule { }
