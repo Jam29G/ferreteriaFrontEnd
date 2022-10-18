@@ -9,6 +9,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .container {
   padding-top: 1rem;
   padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .bg-blue {
@@ -25,7 +26,7 @@ mat-error {
 }
 
 .table {
-  width: 90%;
+  width: 98%;
   overflow-x: auto;
 }
 

@@ -202,9 +202,7 @@ export class AdmUsuariosComponent implements OnInit, AfterViewInit {
             })
           }
         })
-
-        
-        
+ 
       } else if (result.isDenied) {
         Swal.fire('Accion cancelada')
       }

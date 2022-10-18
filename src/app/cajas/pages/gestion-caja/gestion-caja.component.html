@@ -1,1 +1,67 @@
-<p>gestion-caja works!</p>
+<div class="centerContent" *ngIf="caja == undefined; else admcaja">
+
+  <div class="content">
+    <h2>Caja cerrada</h2>
+    <div class="center">
+      <button (click)="abrirCaja()" mat-raised-button color="primary">Abrir caja</button>
+    </div>
+  </div>
+
+</div>
+
+<ng-template #admcaja>
+  
+  <div class="md:flex md:justify-content-between">
+
+    <div class="md:w-6 md:mr-3">
+
+      <mat-card class="">
+        <h2>Datos de caja</h2>
+        <p class="text-base">Nombre de la caja: <b>{{caja?.nombre}}</b></p>
+        <p class="text-base">Fecha de apertura: <b>{{caja?.fechaApertura | date:'d/M/yyy, h:mm:ss a'}}</b></p>
+
+        <div class="mt-4">
+          <p class="text-lg mt-2">Saldo Inicial: <b>{{caja?.saldoInic| currency:'USD':'symbol-narrow':'1.2-2'}}</b></p>
+          <p class="text-lg mt-2">Saldo Actual: <b>{{caja?.saldo | currency:'USD':'symbol-narrow':'1.2-2'}}</b></p>
+          <p class="text-lg mt-2">Saldo Ingresado: <b>{{caja?.saldoIngr| currency:'USD':'symbol-narrow':'1.2-2'}}</b></p>
+        </div>
+
+        <div class="mt-4">
+          <button type="button" (click)="ingresarCaja()" mat-raised-button color="primary" class="w-8rem mr-2">Ingresar en caja</button>
+          <button type="button" (click)="retiroCaja()" mat-raised-button class="w-8rem">Retirar de caja</button>
+        </div>
+
+        <div class="mt-2">
+          <button (click)="cerrarCaja()" color="warn" type="button" mat-raised-button class="w-8rem" color="warn">Cerrar caja</button>
+        </div>
+
+      </mat-card>
+
+    </div>
+
+    <div class="md:w-6">
+      
+      <mat-card>
+        <h2>Encargado de caja</h2>
+        <p class="text-base">Nombre: <b>{{caja?.usuario?.nombre}}</b></p>
+        <p class="text-base">Apellido: <b>{{caja?.usuario?.apellido}}</b></p>
+        <p class="text-base">Username: <b>{{caja?.usuario?.username}}</b></p>
+      </mat-card>
+
+    </div>
+
+  </div>
+
+  <div class="mt-4">
+
+    <h2>Ingresos de caja</h2>
+
+  </div>
+
+  <div class="mt-4">
+
+    <h2>Egresos de caja</h2>
+
+  </div>
+  
+</ng-template>

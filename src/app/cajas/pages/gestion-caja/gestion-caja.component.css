@@ -1,0 +1,16 @@
+.centerContent {
+  width: 100%;
+  height: 89vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.centerContent h2 {
+  text-align: center;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
