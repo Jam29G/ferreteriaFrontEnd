@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AbrirCajaComponent } from '../../components/abrir-caja/abrir-caja.component';
 import { Caja, Usuario } from '../../interfaces/caja.interface';
@@ -7,6 +7,10 @@ import { CajasService } from '../../services/cajas.service';
 import { UsuariosService } from 'src/app/usuarios/services/usuarios.service';
 import Swal from 'sweetalert2';
 import { MovimientoCajaComponent } from '../../components/movimiento-caja/movimiento-caja.component';
+import { MatTableDataSource } from '@angular/material/table';
+import { MovimCaja } from '../../interfaces/movimCaja.interface';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 
 @Component({
@@ -16,7 +20,24 @@ import { MovimientoCajaComponent } from '../../components/movimiento-caja/movimi
 })
 export class GestionCajaComponent implements OnInit {
 
+  //Datatable
+  //Datatable
+  ingresosDisplayedColumns: string[] = ['motivo', 'monto', 'fecha', 'caja', 'usuario', 'venta'];
+  ingresosCajaDataSource!: MatTableDataSource<MovimCaja>;
+
+  egresosDisplayedColumns: string[] = ['motivo', 'monto', 'fecha', 'caja', 'usuario', 'venta'];
+  egresosCajaDataSource!: MatTableDataSource<MovimCaja>;
+
+  @ViewChild('ingrPag') ingresoPaginator!: MatPaginator;
+  @ViewChild('ingrSort') ingresoSort!: MatSort;
+
+  @ViewChild('egrPag') egresoPaginator!: MatPaginator;
+  @ViewChild('egrSort') egresoSort!: MatSort;
+
   _caja: Caja | undefined;
+
+  ingresoRegistros: MovimCaja[] = [];
+  egresoRegistros: MovimCaja[] = [];
 
   get caja(): Caja | undefined {
     return this._caja
@@ -35,10 +56,57 @@ export class GestionCajaComponent implements OnInit {
     this.cajaService.getCajaUsuario(this.authService.auth?.id!).subscribe({
       next: caja => {
         this._caja = caja;
+
+        //obteniendo registros de caja
+        this.cajaService.getMovimCaja(this._caja?.id!, true).subscribe({
+          next: registros => {
+            this.ingresoRegistros = registros;
+            this.ingresosCajaDataSource = new MatTableDataSource(this.ingresoRegistros);
+            this.ingresosCajaDataSource.paginator = this.ingresoPaginator;
+            this.ingresosCajaDataSource.sort = this.ingresoSort;
+          },
+
+          error: err => {
+
+            Swal.fire({
+              position: 'top-end',
+              icon: 'error',
+              title: 'Error al obtener los movimientos de la caja: ' + + err.error.message,
+              showConfirmButton: false,
+              timer: 1500
+            })
+
+          }
+        })
+
+        //obteniendo registros de caja
+        this.cajaService.getMovimCaja(this._caja?.id!, false).subscribe({
+          next: registros => {
+            this.egresoRegistros = registros;
+            this.egresosCajaDataSource = new MatTableDataSource(this.egresoRegistros);
+            this.egresosCajaDataSource.paginator = this.egresoPaginator;
+            this.egresosCajaDataSource.sort = this.egresoSort;
+          },
+          error: err => {
+            
+            Swal.fire({
+              position: 'top-end',
+              icon: 'error',
+              title: 'Error al obtener los movimientos de la caja: ' + + err.error.message,
+              showConfirmButton: false,
+              timer: 1500
+            })
+
+          }
+        })
+
+
       },
+
       error: err => {
 
       }
+
     })
 
     this.usuarioService.getById(this.authService.auth?.id!).subscribe({
@@ -51,6 +119,8 @@ export class GestionCajaComponent implements OnInit {
         }
       }
     })
+
+    
   }
 
   abrirCaja() {
@@ -65,6 +135,49 @@ export class GestionCajaComponent implements OnInit {
         if(data === undefined) return;
 
         this._caja = data;
+
+        //obteniendo registros de caja
+        this.cajaService.getMovimCaja(this._caja?.id!, true).subscribe({
+          next: registros => {
+            this.ingresoRegistros = registros;
+            this.ingresosCajaDataSource = new MatTableDataSource(this.ingresoRegistros);
+            this.ingresosCajaDataSource.paginator = this.ingresoPaginator;
+            this.ingresosCajaDataSource.sort = this.ingresoSort;
+          },
+
+          error: err => {
+
+            Swal.fire({
+              position: 'top-end',
+              icon: 'error',
+              title: 'Error al obtener los movimientos de la caja: ' + + err.error.message,
+              showConfirmButton: false,
+              timer: 1500
+            })
+
+          }
+        })
+
+        //obteniendo registros de caja
+        this.cajaService.getMovimCaja(this._caja?.id!, false).subscribe({
+          next: registros => {
+            this.egresoRegistros = registros;
+            this.egresosCajaDataSource = new MatTableDataSource(this.egresoRegistros);
+            this.egresosCajaDataSource.paginator = this.egresoPaginator;
+            this.egresosCajaDataSource.sort = this.egresoSort;
+          },
+          error: err => {
+            
+            Swal.fire({
+              position: 'top-end',
+              icon: 'error',
+              title: 'Error al obtener los movimientos de la caja: ' + + err.error.message,
+              showConfirmButton: false,
+              timer: 1500
+            })
+
+          }
+        })
 
       }
     })
@@ -123,9 +236,11 @@ export class GestionCajaComponent implements OnInit {
     });
 
     dialog.afterClosed().subscribe({
-      next: caja => {
-        if(caja == undefined) return;
-        this._caja = caja;
+      next: res => {
+        if(res == undefined) return;
+        this._caja = res.caja;
+        this.ingresoRegistros.push(res.movimCaja);
+        this.ingresosCajaDataSource.data = this.ingresoRegistros;
       }
     })
   }
@@ -139,10 +254,12 @@ export class GestionCajaComponent implements OnInit {
     });
 
     dialog.afterClosed().subscribe({
-      next: caja => {
-        if(caja == undefined) return;
+      next: res => {
+        if(res == undefined) return;
 
-        this._caja = caja;
+        this._caja = res.caja;
+        this.egresoRegistros.push(res.movimCaja);
+        this.egresosCajaDataSource.data = this.egresoRegistros;
       }
     })
   }

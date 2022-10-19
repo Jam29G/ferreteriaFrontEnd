@@ -69,7 +69,7 @@ export class MovimientoCajaComponent implements OnInit {
 
     if(this.data.isIngreso) {
       this.cajaService.abonarCaja(this.data, monto, motivo).subscribe({
-        next: caja => {
+        next: res => {
           Swal.fire({
             position: 'center',
             icon: 'success',
@@ -77,13 +77,13 @@ export class MovimientoCajaComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500
           })
-          this.dialogRef.close(caja);
+          this.dialogRef.close(res);
         },
         error: err => {
           Swal.fire({
             position: 'top-end',
             icon: 'error',
-            title: `Error al realizar el ${this.data.isIngreso ? 'Abono' : 'retiro'}` + err.error.message,
+            title: `Error al realizar el ${this.data.isIngreso ? 'Abono' : 'retiro'}: ${err.error.message}`,
             showConfirmButton: false,
             timer: 2500
           })
@@ -91,7 +91,7 @@ export class MovimientoCajaComponent implements OnInit {
       })
     }else {
       this.cajaService.emitirGasto(this.data, monto, motivo).subscribe({
-        next: caja => {
+        next: res => {
           Swal.fire({
             position: 'center',
             icon: 'success',
@@ -99,15 +99,15 @@ export class MovimientoCajaComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500
           })
-          this.dialogRef.close(caja);
+          this.dialogRef.close(res);
         },
         error: err => {
           Swal.fire({
             position: 'top-end',
             icon: 'error',
-            title: `Error al realizar el ${this.data.isIngreso ? 'Abono' : 'retiro'}` + err.error.message,
+            title: `Error al realizar el ${this.data.isIngreso ? 'Abono' : 'retiro'}: ${err.error.message}`,
             showConfirmButton: false,
-            timer: 2500
+            timer: 2800
           })
         }
       })

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './shared/home/home.component';
 import { AuthRequiredGuard } from './auth/guards/auth-required.guard';
 import { AuthGerenteGuard } from './auth/guards/auth-gerente.guard';
+import { AuthAdminGuard } from './auth/guards/auth-admin.guard';
 
 const routes: Routes = [
   {
@@ -24,8 +25,8 @@ const routes: Routes = [
   {
     path: "usuarios",
     loadChildren: () => import('./usuarios/usuarios.module').then(m => m.UsuariosModule),
-    canActivate: [AuthRequiredGuard],
-    canLoad: [AuthRequiredGuard]
+    canActivate: [AuthRequiredGuard, AuthAdminGuard],
+    canLoad: [AuthRequiredGuard, AuthAdminGuard]
   },
   {
     path: '**',
