@@ -38,6 +38,16 @@ export class CajasService {
     return this.http.get<MovimCaja[]>(url, {headers})
   }
 
+  getPendientesAprob(): Observable<Caja[]> {
+
+    const url = `${this.base_url}/cajas/aprobaciones`;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    })
+
+    return this.http.get<Caja[]>(url, {headers})
+  }
+
   abrirCaja(caja: Caja): Observable<Caja> {
 
     const url = `${this.base_url}/cajas`;

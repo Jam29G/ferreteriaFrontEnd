@@ -10,6 +10,7 @@ import { GestionCajaComponent } from './pages/gestion-caja/gestion-caja.componen
 import { AbrirCajaComponent } from './components/abrir-caja/abrir-caja.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MovimientoCajaComponent } from './components/movimiento-caja/movimiento-caja.component';
+import { AprobCajasComponent } from './pages/aprob-cajas/aprob-cajas.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { MovimientoCajaComponent } from './components/movimiento-caja/movimiento
     HomeCajasComponent,
     GestionCajaComponent,
     AbrirCajaComponent,
-    MovimientoCajaComponent
+    MovimientoCajaComponent,
+    AprobCajasComponent
   ],
   imports: [
     CommonModule,

@@ -65,9 +65,9 @@ export class SidenavComponent implements OnInit {
       id: "cajas",
       children: [
         {
-          label: "Administrar cajas",
+          label: "Aprobacion de cajas",
           icon: "label",
-          link: "/cajas/adm"
+          link: "/cajas/aprobaciones"
         },
         {
           label: "Gestionar caja",

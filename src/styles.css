@@ -35,6 +35,11 @@ mat-error {
   width: 600px;
 }
 
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+  padding-left: 0.3rem !important;
+  padding-right: 0.3rem !important;
+}
+
 @media only screen and (max-width: 760px) {
   .dialog-responsive {
       width: 100%;
