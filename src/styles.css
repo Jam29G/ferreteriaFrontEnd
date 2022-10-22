@@ -33,6 +33,14 @@ mat-error {
 
 .dialog-responsive {
   width: 600px;
+  max-height: 99vh;
+  overflow-y: auto;
+}
+
+.dialog-responsive-xl {
+  width: 800px;
+  max-height: 99vh;
+  overflow-y: auto;
 }
 
 th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
@@ -41,7 +49,7 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 }
 
 @media only screen and (max-width: 760px) {
-  .dialog-responsive {
+  .dialog-responsive, .dialog-responsive-xl{
       width: 100%;
   }
 }

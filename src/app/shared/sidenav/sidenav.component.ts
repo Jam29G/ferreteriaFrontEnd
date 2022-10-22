@@ -50,11 +50,6 @@ export class SidenavComponent implements OnInit {
           icon: "label",
           link: "/usuarios/adm"
         },
-        {
-          label: "recurso 2",
-          icon: "label",
-          link: ""
-        }
       ]
       
     },
@@ -73,6 +68,11 @@ export class SidenavComponent implements OnInit {
           label: "Gestionar caja",
           icon: "label",
           link: "/cajas/gestion"
+        },
+        {
+          label: "Registros de caja",
+          icon: "label",
+          link: "/cajas/registros"
         },
       ]
     }

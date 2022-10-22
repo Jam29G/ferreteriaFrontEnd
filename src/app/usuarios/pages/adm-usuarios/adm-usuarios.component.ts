@@ -195,8 +195,8 @@ export class AdmUsuariosComponent implements OnInit, AfterViewInit {
           error: (err) => {
             Swal.fire({
               position: 'center',
-              icon: 'success',
-              title: `Error al ${title} el producto: ${err.error.message}` ,
+              icon: 'error',
+              title: `Error al ${title} al usuario: ${err.error.message}` ,
               showConfirmButton: false,
               timer: 1500
             })

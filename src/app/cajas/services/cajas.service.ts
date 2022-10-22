@@ -29,6 +29,59 @@ export class CajasService {
     return this.http.get<Caja>(url, {headers});
   }
 
+  getAllCajas(estado: boolean): Observable<Caja[]> {
+    const url = `${this.base_url}/cajas?estado=${estado}`;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    })
+
+    return this.http.get<Caja[]>(url, {headers});
+  }
+
+  getCajasToday(estado: boolean, aprobacion: string): Observable<Caja[]> {
+
+    let url = "";
+    if(aprobacion.length === 0) {
+      url = `${this.base_url}/cajas/todayFilter?estado=${estado}`;
+    } else {
+      url = `${this.base_url}/cajas/todayFilter?estado=${estado}&aprobacion=${aprobacion}`;
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    })
+
+    return this.http.get<Caja[]>(url, {headers});
+  }
+
+  getCajasByDateRange(estado: boolean, aprobacion: string, start: string, end: string): Observable<Caja[]> {
+
+    let url = "";
+    if(aprobacion.length === 0) {
+      url = `${this.base_url}/cajas/rangeDate?estado=${estado}&fechaInic=${start}&fechaFin=${end}`;
+    } else {
+      url = `${this.base_url}/cajas/rangeDate?estado=${estado}&aprobacion=${aprobacion}&fechaInic=${start}&fechaFin=${end}`;
+    }
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    })
+
+    return this.http.get<Caja[]>(url, {headers});
+  }
+
+  
+
+  getCajaById(id: number): Observable<Caja> {
+    const url = `${this.base_url}/cajas/${id}`;
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    })
+
+    return this.http.get<Caja>(url, {headers});
+  }
+
   getMovimCaja(cajaId: number, isIngreso: boolean): Observable<MovimCaja[]> {
     const url = `${this.base_url}/cajas/movimientos?cajaId=${cajaId}&isIngreso=${isIngreso}`;
     const headers = new HttpHeaders({
@@ -68,6 +121,16 @@ export class CajasService {
     })
 
     return this.http.put<Caja>(url, caja, {headers});
+  }
+
+  changeAprob(id: number, aprob: string): Observable<Caja> {
+    const url = `${this.base_url}/cajas/aprobacion?id=${id}&aprob=${aprob}`;
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    })
+
+    return this.http.put<Caja>(url, undefined, {headers});
   }
 
   emitirGasto(caja: Caja, monto: number, motivo: string): Observable<any> {

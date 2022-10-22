@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { CajasRoutingModule } from './cajas-routing.module';
-import { AdmCajasComponent } from './pages/adm-cajas/adm-cajas.component';
 import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
 import { HomeCajasComponent } from './pages/home-cajas/home-cajas.component';
@@ -11,16 +10,19 @@ import { AbrirCajaComponent } from './components/abrir-caja/abrir-caja.component
 import { ReactiveFormsModule } from '@angular/forms';
 import { MovimientoCajaComponent } from './components/movimiento-caja/movimiento-caja.component';
 import { AprobCajasComponent } from './pages/aprob-cajas/aprob-cajas.component';
+import { ShowDetailsComponent } from './components/show-details/show-details.component';
+import { RegistroCajasComponent } from './pages/registro-cajas/registro-cajas.component';
 
 
 @NgModule({
   declarations: [
-    AdmCajasComponent,
     HomeCajasComponent,
     GestionCajaComponent,
     AbrirCajaComponent,
     MovimientoCajaComponent,
-    AprobCajasComponent
+    AprobCajasComponent,
+    ShowDetailsComponent,
+    RegistroCajasComponent
   ],
   imports: [
     CommonModule,
@@ -28,6 +30,9 @@ import { AprobCajasComponent } from './pages/aprob-cajas/aprob-cajas.component';
     MaterialModule,
     SharedModule,
     ReactiveFormsModule
+  ],
+  providers: [
+    DatePipe
   ]
 })
 export class CajasModule { }

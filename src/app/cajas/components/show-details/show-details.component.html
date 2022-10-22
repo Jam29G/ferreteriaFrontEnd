@@ -1,0 +1,141 @@
+<h2>Detalles</h2>
+<div class="md:flex md:justify-content-between">
+
+  <div class="md:w-6 md:mr-3">
+
+    <mat-card class="">
+      <h2>Datos de caja</h2>
+      <p class="text-base">Nombre de la caja: <b>{{details.caja?.nombre}}</b></p>
+      <p class="text-base">Fecha de apertura: <b>{{details.caja?.fechaApertura | date:'d/M/yyy, h:mm:ss a'}}</b></p>
+
+      <div class="mt-4">
+        <p class="text-lg mt-2">Saldo Inicial: <b>{{details.caja?.saldoInic| currency:'USD':'symbol-narrow':'1.2-2'}}</b></p>
+        <p class="text-lg mt-2">Saldo Final: <b>{{details.caja?.saldoFinal| currency:'USD':'symbol-narrow':'1.2-2'}}</b></p>
+        <p class="text-lg mt-2">Saldo Ingresado: <b>{{details.caja?.saldoIngr| currency:'USD':'symbol-narrow':'1.2-2'}}</b></p>
+        <p class="text-lg mt-2">Saldo Retirado: <b>{{saldoRetirado| currency:'USD':'symbol-narrow':'1.2-2'}}</b></p>
+      </div>
+
+    </mat-card>
+
+  </div>
+
+  <div class="md:w-6">
+    
+    <mat-card>
+      <h2>Encargado de caja</h2>
+      <p class="text-base">Nombre: <b>{{details.caja?.usuario?.nombre}}</b></p>
+      <p class="text-base">Apellido: <b>{{details.caja?.usuario?.apellido}}</b></p>
+      <p class="text-base">Username: <b>{{details.caja?.usuario?.username}}</b></p>
+    </mat-card>
+
+  </div>
+
+</div>
+
+<div class="mt-4">
+
+  <h2>Ingresos de caja</h2>
+  <table mat-table [dataSource]="ingresosCajaDataSource" matSort #ingrSort="matSort" class="w-full">
+
+    <ng-container matColumnDef="motivo">
+      <th mat-header-cell *matHeaderCellDef >Motivo de ingreso</th>
+      <td mat-cell *matCellDef="let element">{{element.motivo}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="monto">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header >Monto ingresado</th>
+      <td mat-cell *matCellDef="let element">{{element.monto | currency:'USD':'symbol-narrow':'1.2-2'}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="fecha">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header >Fecha</th>
+      <td mat-cell *matCellDef="let element">{{element.fecha | date:'d/M/yyy, h:mm:ss a'}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="caja">
+      <th mat-header-cell *matHeaderCellDef >Caja</th>
+      <td mat-cell *matCellDef="let element">{{element.caja.nombre}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="usuario">
+      <th mat-header-cell *matHeaderCellDef >Usuario</th>
+      <td mat-cell *matCellDef="let element">{{element.caja.usuario.username}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="venta">
+      <th mat-header-cell *matHeaderCellDef >Venta</th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          *ngIf="element.venta != undefined"
+          mat-raised-button 
+          color="primary" 
+        >
+          Ver venta
+        </button>
+        <span>Inexistente</span>
+      </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="ingresosDisplayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: ingresosDisplayedColumns;"></tr>
+  </table>
+  <mat-paginator #ingrPag [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+
+</div>
+
+<hr>
+
+<div class="mt-4">
+
+  <h2>Retiros de caja</h2>
+  <table mat-table [dataSource]="egresosCajaDataSource" matSort #egrSort="matSort" class="w-full">
+
+    <ng-container matColumnDef="motivo">
+      <th mat-header-cell *matHeaderCellDef >Motivo de retiro</th>
+      <td mat-cell *matCellDef="let element">{{element.motivo}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="monto">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header >Monto retirado</th>
+      <td mat-cell *matCellDef="let element">{{element.monto | currency:'USD':'symbol-narrow':'1.2-2'}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="fecha">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header >Fecha</th>
+      <td mat-cell *matCellDef="let element">{{element.fecha | date:'d/M/yyy, h:mm:ss a'}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="caja">
+      <th mat-header-cell *matHeaderCellDef >Caja</th>
+      <td mat-cell *matCellDef="let element">{{element.caja.nombre}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="usuario">
+      <th mat-header-cell *matHeaderCellDef >Usuario</th>
+      <td mat-cell *matCellDef="let element">{{element.caja.usuario.username}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="venta">
+      <th mat-header-cell *matHeaderCellDef >Venta</th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          *ngIf="element.venta != undefined"
+          mat-raised-button 
+          color="primary" 
+        >
+          Ver venta
+        </button>
+        <span>Inexistente</span>
+      </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="egresosDisplayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: egresosDisplayedColumns;"></tr>
+  </table>
+  <mat-paginator #egrPag [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+
+</div>
+
+
