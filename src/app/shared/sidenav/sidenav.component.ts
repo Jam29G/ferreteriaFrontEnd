@@ -75,7 +75,14 @@ export class SidenavComponent implements OnInit {
           link: "/cajas/registros"
         },
       ]
-    }
+    },
+    {
+      label: "Empresas",
+      icon: "domain",
+      link: "/empresas/adm",
+      id: "empresas"
+    },
+    
 
   ]
     

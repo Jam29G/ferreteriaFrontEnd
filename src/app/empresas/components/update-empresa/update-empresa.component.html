@@ -1,0 +1,60 @@
+<h2>Actualizar empresa</h2>
+<form autocomplete="off" [formGroup]="form" (ngSubmit)="submitForm()" class="w-full">
+
+  <div class="mb-3 mb-3 md:flex md:justify-content-between">
+
+    <div class="md:w-full md:mr-2">
+      <mat-form-field class="w-full" appearance="fill">
+        <mat-label>Dirección</mat-label>
+        <input formControlName="direccion" type="text" matInput placeholder="Ingrese la dirección">
+  
+        <mat-error 
+          *ngIf="invalidField('direccion')"
+        >
+          {{direccionError}}
+        </mat-error>
+  
+      </mat-form-field>
+    </div>
+
+  </div>
+
+  <div class="mb-3 mb-3 md:flex md:justify-content-between">
+
+    <div class="md:w-6 md:mr-2">
+      <mat-form-field class="w-full" appearance="fill">
+        <mat-label>Telefono</mat-label>
+        <input formControlName="telefono" type="text" matInput placeholder="Ingrese el telefono">
+  
+        <mat-error 
+          *ngIf="invalidField('telefono')"
+        >
+          {{telefonoError}}
+        </mat-error>
+  
+      </mat-form-field>
+    </div>
+
+    <div class="md:w-6 md:mr-2">
+      <mat-form-field class="w-full" appearance="fill">
+        <mat-label>Correo</mat-label>
+        <input formControlName="correo" type="text" matInput placeholder="Ingrese el correo">
+  
+        <mat-error 
+          *ngIf="invalidField('correo')"
+        >
+          {{correoError}}
+        </mat-error>
+  
+      </mat-form-field>
+    </div>
+
+  </div>
+
+  <div>
+    <button type="submit" mat-raised-button color="primary" class="mr-2 w-7rem">Guardar</button>
+    <button type="button" (click)="close()" mat-raised-button class="w-7rem" color="warn">Cerrar</button>
+  </div>
+</form>
+
+

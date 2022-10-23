@@ -29,6 +29,12 @@ const routes: Routes = [
     canLoad: [AuthRequiredGuard, AuthAdminGuard]
   },
   {
+    path: "empresas",
+    loadChildren: () => import('./empresas/empresas.module').then(m => m.EmpresasModule),
+    canActivate: [AuthRequiredGuard],
+    canLoad: [AuthRequiredGuard]
+  },
+  {
     path: '**',
     redirectTo: ''
   }
