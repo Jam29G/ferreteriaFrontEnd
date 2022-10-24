@@ -11,6 +11,8 @@ export class ValidatorService {
   public namePattern: string = "^[a-zA-Zá-ú,.'-]+$";
   public lowerLettersAndNumbers: string = "^[a-z0-9]+$";
   public phoneNumber: string = "^([0-9]{8})|([0-9]{4}-[0-9]{4})$";
+  public onlyNumbers: string = "^[0-9]+$";
+  public onlyLetters: string = "^[a-zA-Z ]+$";
 
   constructor() { }
 }

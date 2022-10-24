@@ -6,7 +6,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Empresa } from '../../interfaces/empresa.interface';
 import { EmpresaService } from '../../services/empresa.service';
 import Swal from 'sweetalert2';
-import { debounceTime, Subject, switchMap } from 'rxjs';
 import { CrearEmpresaComponent } from '../../components/crear-empresa/crear-empresa.component';
 import { UpdateEmpresaComponent } from '../../components/update-empresa/update-empresa.component';
 

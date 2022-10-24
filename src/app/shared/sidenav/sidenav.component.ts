@@ -77,6 +77,19 @@ export class SidenavComponent implements OnInit {
       ]
     },
     {
+      label: "Productos",
+      icon: "inventory2",
+      link: "",
+      id: "productos",
+      children: [
+        {
+          label: "Ubicaciones de productos",
+          icon: "label",
+          link: "/productos/ubicaciones"
+        },
+      ]
+    },
+    {
       label: "Empresas",
       icon: "domain",
       link: "/empresas/adm",

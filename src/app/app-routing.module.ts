@@ -35,6 +35,12 @@ const routes: Routes = [
     canLoad: [AuthRequiredGuard]
   },
   {
+    path: "productos",
+    loadChildren: () => import('./productos/productos.module').then(m => m.ProductosModule),
+    canActivate: [AuthRequiredGuard],
+    canLoad: [AuthRequiredGuard]
+  },
+  {
     path: '**',
     redirectTo: ''
   }
