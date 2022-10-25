@@ -96,14 +96,29 @@ export class UbicacionesComponent implements OnInit {
             })
           },
           error: (err) => {
-            Swal.fire({
-              position: 'center',
-              icon: 'error',
-              title: `Error al eliminar la ubicación: ${err.error.message}` ,
-              showConfirmButton: false,
-              timer: 2800
-            })
+
+            if(err.status == 500) {
+              Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: `Error al eliminar la ubicación: La ubicación ya esta asociada con un producto` ,
+                showConfirmButton: false,
+                timer: 2800
+              })
+            } else {
+              Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: `Error al eliminar la ubicación` ,
+                showConfirmButton: false,
+                timer: 2800
+              })
+            }
+
+
+            
           }
+
         })
  
       } else if (result.isDenied) {

@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { HomeCajasComponent } from './pages/home-cajas/home-cajas.component';
 import { GestionCajaComponent } from './pages/gestion-caja/gestion-caja.component';
 import { AprobCajasComponent } from './pages/aprob-cajas/aprob-cajas.component';
 import { RegistroCajasComponent } from './pages/registro-cajas/registro-cajas.component';
+import { AuthGerenteGuard } from '../auth/guards/auth-gerente.guard';
 
 const routes: Routes = [
   {
@@ -12,7 +13,9 @@ const routes: Routes = [
     children: [
       {
         path: 'registros',
-        component: RegistroCajasComponent
+        component: RegistroCajasComponent,
+        canActivate: [AuthGerenteGuard],
+        canLoad: [AuthGerenteGuard]
       },
       {
         path: 'gestion',
@@ -20,7 +23,9 @@ const routes: Routes = [
       },
       {
         path: 'aprobaciones',
-        component: AprobCajasComponent
+        component: AprobCajasComponent,
+        canActivate: [AuthGerenteGuard],
+        canLoad: [AuthGerenteGuard]
       }
     ]
   }

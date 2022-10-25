@@ -31,8 +31,8 @@ const routes: Routes = [
   {
     path: "empresas",
     loadChildren: () => import('./empresas/empresas.module').then(m => m.EmpresasModule),
-    canActivate: [AuthRequiredGuard],
-    canLoad: [AuthRequiredGuard]
+    canActivate: [AuthRequiredGuard, AuthGerenteGuard],
+    canLoad: [AuthRequiredGuard, AuthGerenteGuard]
   },
   {
     path: "productos",
