@@ -133,5 +133,14 @@ export class ProductoService {
     return this.http.put<Producto>(url, ubicaciones, {headers});
   }
 
+  changeState(id: number, estado: boolean): Observable<Producto> {
+    const url = `${this.base_url}/productos/changeState/${id}?estado=${estado}`;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    })
+
+    return this.http.put<Producto>(url, undefined, {headers});
+  }
+
 
 }

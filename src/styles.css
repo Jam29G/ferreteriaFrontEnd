@@ -19,6 +19,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   z-index: 1;
 }
 
+.thumb-img {
+  width: 40px;
+}
+
 .bg-blue {
   background-color: #0d6efd;
   color: #fff;

@@ -12,6 +12,7 @@ import { Empresa } from '../../../empresas/interfaces/empresa.interface';
 import { AddUbicacionesComponent } from '../../components/add-ubicaciones/add-ubicaciones.component';
 import { RemoveProveedoresComponent } from '../../components/remove-proveedores/remove-proveedores.component';
 import { RemoveUbicacionesComponent } from '../../components/remove-ubicaciones/remove-ubicaciones.component';
+import { UpdateProductoComponent } from '../../components/update-producto/update-producto.component';
 
 @Component({
   selector: 'app-adm-productos',
@@ -102,6 +103,113 @@ export class AdmProductosComponent implements OnInit {
 
   updateProducto(id: number) {
 
+    this.productoService.getById(id).subscribe({
+      next: prod => {
+        const dialogRef = this.dialog.open(UpdateProductoComponent, {
+          panelClass: 'dialog-responsive',
+          data: prod
+        });
+    
+        dialogRef.afterClosed().subscribe({
+          next: res => {
+            if(res !== undefined) {
+              let updateProd = res;
+              let index = this.productos.findIndex(el => el.id! = id);
+    
+              this.productos[index] = updateProd;
+              this.dataSource.data = this.productos;
+    
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Producto actualizado correctamente',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            }
+          }
+        })
+      },
+      error: err => {
+
+      }
+    })
+
+    
+
+  }
+
+  change(event: any) {
+
+    this.desChecked = event.checked;
+    this.getAll(!event.checked)
+  }
+
+  getAll(estado: boolean) {
+    this.productoService.getAll(estado).subscribe({
+      next: productos => {
+
+        this.productos = productos;
+
+        this.dataSource.data = this.productos;
+        //this.dataSource.paginator = this.paginator;
+        
+      },
+      error: err => {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Error al obtener los productos: ' + + err.error.message,
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
+    })
+  }
+
+  changeState(id: number, estado: boolean) {
+    let title: string = estado ? "habilitar" : "deshabilitar";
+
+    Swal.fire({
+      title: `¿Seguro que quieres ${title} el usuario?`,
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: `${title}`,
+      denyButtonText: `Cancelar`,
+    }).then((result) => {
+
+      if (result.isConfirmed) {
+
+        this.productoService.changeState(id, estado).subscribe({
+          next: (response) => {
+            let index: number = this.productos.findIndex( element => element.id == id );
+            this.productos.splice(index, 1);
+
+            this.dataSource.data = this.productos;
+
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: `${estado ? "habilitado" : "deshabilitado"} correctamente`,
+              showConfirmButton: false,
+              timer: 1500
+            })
+          },
+          error: (err) => {
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: `Error al ${title} al producto: ${err.error.message}` ,
+              showConfirmButton: false,
+              timer: 1500
+            })
+          }
+        })
+ 
+      } else if (result.isDenied) {
+        Swal.fire('Accion cancelada')
+      }
+    })
   }
 
   addProv(id: number) {

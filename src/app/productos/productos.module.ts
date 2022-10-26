@@ -14,6 +14,7 @@ import { AddProveedroComponent } from './components/add-proveedro/add-proveedro.
 import { AddUbicacionesComponent } from './components/add-ubicaciones/add-ubicaciones.component';
 import { RemoveProveedoresComponent } from './components/remove-proveedores/remove-proveedores.component';
 import { RemoveUbicacionesComponent } from './components/remove-ubicaciones/remove-ubicaciones.component';
+import { UpdateProductoComponent } from './components/update-producto/update-producto.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { RemoveUbicacionesComponent } from './components/remove-ubicaciones/remo
     AddProveedroComponent,
     AddUbicacionesComponent,
     RemoveProveedoresComponent,
-    RemoveUbicacionesComponent
+    RemoveUbicacionesComponent,
+    UpdateProductoComponent
   ],
   imports: [
     CommonModule,
