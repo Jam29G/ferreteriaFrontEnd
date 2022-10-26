@@ -1,0 +1,112 @@
+<h2>Crear una nueva empresa</h2>
+<form autocomplete="off" [formGroup]="form" (ngSubmit)="submitForm()" class="w-full">
+
+  <div class="mb-3 mb-3 md:flex md:justify-content-between">
+
+    <div class="md:w-6 md:mr-2">
+
+      <mat-form-field class="w-full" appearance="fill">
+        <mat-label>Codigo</mat-label>
+        <input formControlName="codigo" type="text" matInput placeholder="Ingrese el codigo del producto">
+  
+        <mat-error 
+          *ngIf="invalidField('codigo')"
+        >
+          {{codigoError}}
+        </mat-error>
+  
+      </mat-form-field>
+
+    </div>
+
+    <div class="md:w-6 md:mr-2">
+
+      <mat-form-field class="w-full" appearance="fill">
+        <mat-label>nombre</mat-label>
+        <input formControlName="nombre" type="text" matInput placeholder="Ingrese el nombre del producto">
+  
+        <mat-error 
+          *ngIf="invalidField('nombre')"
+        >
+          {{nombreError}}
+        </mat-error>
+  
+      </mat-form-field>
+
+    </div>
+
+  </div>
+
+  <div class="mb-3 mb-3 md:flex md:justify-content-between">
+
+    <div class="md:w-6 md:mr-2">
+      <mat-form-field class="w-full" appearance="fill">
+        <mat-label>Descuento maximo</mat-label>
+        <input type="number" step="0.01" formControlName="descuento" type="text" matInput placeholder="Ingrese el descuento max..">
+  
+        <mat-error 
+          *ngIf="invalidField('descuento')"
+        >
+          {{descuentoError}}
+        </mat-error>
+  
+      </mat-form-field>
+    </div>
+
+    <div class="md:w-6 md:mr-2">
+      <mat-form-field class="w-full" appearance="fill">
+        <mat-label>descripcion</mat-label>
+        <input formControlName="descripcion" type="text" matInput placeholder="Ingrese la descripcion">
+  
+        <mat-error 
+          *ngIf="invalidField('descripcion')"
+        >
+          {{descripcionError}}
+        </mat-error>
+  
+      </mat-form-field>
+    </div>
+
+  </div>
+
+  <div class="mb-3 mb-3 md:flex md:justify-content-between">
+
+    <div class="md:w-6 md:mr-2">
+
+      <div>
+        <button class="w-7" type="button" mat-raised-button (click)="fileInput.click()">Escoge una imagen</button>
+        <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+        <div class="mt-2">
+
+          <span *ngIf="img !== undefined">
+            Imagen: {{img.name}}
+          </span>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="md:w-6 md:mr-2">
+      <label>Perecedero: </label>
+      <mat-radio-group formControlName="perecedero">
+        <mat-radio-button class="mr-2" value="true">Si</mat-radio-button>
+        <mat-radio-button value="false">No</mat-radio-button>
+      </mat-radio-group>
+
+      <mat-error 
+          *ngIf="invalidField('perecedero')"
+        >
+          {{perecederoError}}
+        </mat-error>
+    </div>
+
+  </div>
+
+  <div>
+    <button type="submit" mat-raised-button color="primary" class="mr-2 w-7rem">Guardar</button>
+    <button type="button" (click)="close()" mat-raised-button class="w-7rem" color="warn">Cerrar</button>
+  </div>
+</form>
+
+

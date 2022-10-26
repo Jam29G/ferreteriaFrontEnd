@@ -13,6 +13,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   padding-right: 1rem;
 }
 
+.topBar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
 .bg-blue {
   background-color: #0d6efd;
   color: #fff;

@@ -54,6 +54,7 @@ export class AdmEmpresasComponent implements OnInit {
 
   //Buscador por nombre, telefono y correo
   applyFilter(event: Event) {
+    
     const filterValue = (event.target as HTMLInputElement).value;
     
     this.empresaService.findEmpresa(filterValue, !this.desChecked).subscribe({
@@ -73,11 +74,11 @@ export class AdmEmpresasComponent implements OnInit {
     })
 
 
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
       
     }
+
   }
 
   getAll(estado: boolean) {
