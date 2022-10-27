@@ -1,4 +1,4 @@
-<form [formGroup]="form">
+<form (ngSubmit)="submitForm()" [formGroup]="form">
   <div>
     <h3>Seleccione el proveedor</h3>
     <mat-form-field appearance="fill" class="w-full">
@@ -36,81 +36,113 @@
             *ngIf="invalidField('numFactura')"
           >
             {{facturaError}}
-          </mat-error> 
+          </mat-error>
     
         </mat-form-field>
       </div>
   
     </div>
+
+    <div *ngIf="empresa != undefined" class="w-full">
+      <h3>Detalle de la compra</h3>
+    
+      <div>
+        <mat-form-field appearance="standard">
+          <mat-label>Buscar</mat-label>
+          <input autocomplete="false" autocomplete="off" matInput (keyup)="applyFilter($event)" #input>
+        </mat-form-field>
+      </div>
+    
+      <div>
+        <button  type="button" class="mt-2" (click)="create()" mat-raised-button color="primary">Agregar item</button>
+      </div>
+    
+      <div class="table">
+        <table mat-table [dataSource]="dataSource" matSort class="w-full mt-2">
+    
+          <ng-container matColumnDef="codigo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header >Codigo</th>
+            <td mat-cell *matCellDef="let element">{{element.producto.codigo}}</td>
+            
+          </ng-container>
+      
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header >Nombre</th>
+            <td mat-cell *matCellDef="let element">{{element.producto.nombre}}</td>
+          </ng-container>
+      
+          <ng-container matColumnDef="cantidad">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header >Cantidad</th>
+  
+            <td mat-cell *matCellDef="let element let i = index">
+      
+              <mat-form-field class="w-full mt-2" formGroupName="cantidades" appearance="fill">
+                <mat-label>Cantidad</mat-label>
+                <input min="1" value="1" [formControlName]="element.id" (input)="changeCantidad(i, element.id)"  autocomplete="off" type="number" step="1" matInput placeholder="Ingrese la cantidad">
+              </mat-form-field>
+      
+            </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="perecedero">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header >Perecedero</th>
+            <td mat-cell *matCellDef="let element">{{element.producto.isPerecedero ? 'Si' : 'No'}}</td>
+          </ng-container>
+      
+          <ng-container matColumnDef="fechaVenc">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header >Fecha venc..</th>
+            <td mat-cell *matCellDef="let element">
+              <span *ngIf="element.fechaVenc != undefined">
+                {{element.fechaVenc | date:'d/M/yyy'}}
+              </span>
+              <span *ngIf="element.fechaVenc == undefined">
+                No vence
+              </span>
+            </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="precioCompra">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header >precio de compra</th>
+            <td mat-cell *matCellDef="let element">{{element.precioCompra | currency:'USD':'symbol-narrow':'1.2-2'}}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="importe">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header >Importe</th>
+            <td mat-cell *matCellDef="let element">
+              <span *ngIf="element.importe != undefined">
+                {{element.importe  | currency:'USD':'symbol-narrow':'1.2-2'}}
+              </span>
+              <span *ngIf="element.importe == undefined">
+                {{0  | currency:'USD':'symbol-narrow':'1.2-2'}}
+              </span>
+            </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="options">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let element let i = index">
+      
+              <button type="button" (click)="deleteElement(i, element.id)" mat-raised-button color="warn">Eliminar</button>
+            </td>
+          </ng-container>
+
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+        <h3>Total: <span class="font-semibold">{{monto | currency:'USD':'symbol-narrow':'1.2-2'}}</span></h3>
+      </div>
+
+      <div>
+        <button [disabled]="detallesProd.length <= 0" type="submit" mat-raised-button color="primary" class="mr-2 w-7rem">Guardar</button>
+      </div>
+    
+    </div>
   
   </div>
 
+  
 </form>
 
-<div *ngIf="empresa != undefined" class="w-full">
-  <h3>Detalle de la compra</h3>
-
-  <div>
-    <button type="button" class="mt-2" (click)="null" mat-raised-button color="primary">Agregar item</button>
-  </div>
-
-  <table mat-table [dataSource]="dataSource" matSort class="w-full mt-2">
-
-    <ng-container matColumnDef="codigo">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header >Codigo</th>
-      <td mat-cell *matCellDef="let element">{{element.producto.codigo}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="nombre">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header >Nombre</th>
-      <td mat-cell *matCellDef="let element">{{element.producto.nombre}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="cantidad">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header >Cantidad</th>
-      <td mat-cell *matCellDef="let element">
-
-        <mat-form-field class="w-full" appearance="fill">
-          <mat-label>Cantidad</mat-label>
-          <input type="number" step="1" matInput placeholder="Ingrese la cantidad">
-        </mat-form-field>
-
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="perecedero">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header >Perecedero</th>
-      <td mat-cell *matCellDef="let element">{{element.producto.perecedero ? 'Si' : 'No'}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="fechaVenc">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header >Fecha venc..</th>
-      <td mat-cell *matCellDef="let element">
-        <span *ngIf="element.fechaVenc != undefined">
-          {{element.fechaVenc | date:'d/M/yyy'}}
-        </span>
-        <span *ngIf="element.fechaVenc == undefined">
-          No vence
-        </span>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="precioVenta">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header >precio de venta</th>
-      <td mat-cell *matCellDef="let element">{{element.precioVenta | currency:'USD':'symbol-narrow':'1.2-2'}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="options">
-      <th mat-header-cell *matHeaderCellDef>Acciones</th>
-      <td mat-cell *matCellDef="let element let i = index">
-
-        <button type="button" (click)="null" mat-raised-button color="warn">Eliminar</button>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
-
-</div>

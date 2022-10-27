@@ -7,12 +7,14 @@ import { MaterialModule } from '../material/material.module';
 import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CrearCompraComponent } from './pages/crear-compra/crear-compra.component';
+import { AddItemComponent } from './components/add-item/add-item.component';
 
 
 @NgModule({
   declarations: [
     HomeComprasComponent,
-    CrearCompraComponent
+    CrearCompraComponent,
+    AddItemComponent
   ],
   imports: [
     CommonModule,

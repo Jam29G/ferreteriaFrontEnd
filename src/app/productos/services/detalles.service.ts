@@ -30,6 +30,15 @@ export class DetallesService {
     return this.http.get<DetalleProducto[]>(url, {headers});
   }
 
+  getByEmpresa(id: number, estado: boolean) {
+    const url = `${this.base_url}/detalleProducto/empresa/${id}?estado=${estado}`;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    })
+
+    return this.http.get<DetalleProducto[]>(url, {headers});
+  }
+
   getById(id: number): Observable<DetalleProducto> {
     const url = `${this.base_url}/detalleProducto/${id}`;
 
@@ -69,4 +78,6 @@ export class DetallesService {
 
     return this.http.put<any>(url, undefined, {headers});
   }
+
+
 }

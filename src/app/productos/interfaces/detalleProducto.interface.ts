@@ -13,5 +13,7 @@ export interface DetalleProducto {
   estado:        boolean;
   producto:      Producto;
   cantidadVP?: number;
+  importe?: number;
+  
 }
 
