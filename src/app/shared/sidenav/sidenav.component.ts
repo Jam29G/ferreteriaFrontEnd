@@ -83,14 +83,33 @@ export class SidenavComponent implements OnInit {
       id: "productos",
       children: [
         {
+          label: "Administrar productos",
+          icon: "label",
+          link: "/productos/adm"
+        },
+        {
+          label: "Administrar detalles de productos",
+          icon: "label",
+          link: "/productos/admDetalles"
+        },
+        {
           label: "Ubicaciones de productos",
           icon: "label",
           link: "/productos/ubicaciones"
         },
+        
+      ]
+    },
+    {
+      label: "Compras",
+      icon: "shopping_cart_checkout",
+      link: "",
+      id: "compras",
+      children: [
         {
-          label: "Administrar productos",
+          label: "Crear compra",
           icon: "label",
-          link: "/productos/adm"
+          link: "/compras/crear"
         },
       ]
     },

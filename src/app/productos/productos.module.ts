@@ -15,6 +15,9 @@ import { AddUbicacionesComponent } from './components/add-ubicaciones/add-ubicac
 import { RemoveProveedoresComponent } from './components/remove-proveedores/remove-proveedores.component';
 import { RemoveUbicacionesComponent } from './components/remove-ubicaciones/remove-ubicaciones.component';
 import { UpdateProductoComponent } from './components/update-producto/update-producto.component';
+import { AdmDetalleProductoComponent } from './pages/adm-detalle-producto/adm-detalle-producto.component';
+import { AddDetalleProdComponent } from './components/detalle/add-detalle-prod/add-detalle-prod.component';
+import { EditDetalleProdComponent } from './components/detalle/edit-detalle-prod/edit-detalle-prod.component';
 
 
 @NgModule({
@@ -28,7 +31,10 @@ import { UpdateProductoComponent } from './components/update-producto/update-pro
     AddUbicacionesComponent,
     RemoveProveedoresComponent,
     RemoveUbicacionesComponent,
-    UpdateProductoComponent
+    UpdateProductoComponent,
+    AdmDetalleProductoComponent,
+    AddDetalleProdComponent,
+    EditDetalleProdComponent,
   ],
   imports: [
     CommonModule,

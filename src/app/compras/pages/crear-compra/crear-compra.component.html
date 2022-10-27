@@ -1,0 +1,116 @@
+<form [formGroup]="form">
+  <div>
+    <h3>Seleccione el proveedor</h3>
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Proveedor</mat-label>
+      <input type="text"
+             placeholder="Seleccione un proveedor"
+             aria-label="Proveedor"
+             matInput
+             [formControl]="myControl"
+             [matAutocomplete]="auto"
+             (input)="buscar()">
+      <mat-autocomplete [displayWith]="displayFn" #auto="matAutocomplete" (optionSelected)="opcionSeleccionada($event)">
+        <mat-option *ngFor="let empresa of empresas" [value]="empresa">
+          {{empresa.id}} - {{empresa.nombre}}
+        </mat-option>
+
+        <!-- <mat-option *ngIf="heroes.length == 0 && termino.trim().length > 0" [value]="''">
+          No se encontro nada con el termino {{ termino }}
+        </mat-option> -->
+
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+  
+  <div class="w-full">
+  
+    <div class="mb-3 mb-3 md:flex md:justify-content-between">
+  
+      <div class="md:w-6 md:mr-2">
+        <mat-form-field class="w-full" appearance="fill">
+          <mat-label>N° de factura</mat-label>
+          <input formControlName="numFactura" type="text" matInput placeholder="El numero de factura">
+    
+          <mat-error 
+            *ngIf="invalidField('numFactura')"
+          >
+            {{facturaError}}
+          </mat-error> 
+    
+        </mat-form-field>
+      </div>
+  
+    </div>
+  
+  </div>
+
+</form>
+
+<div *ngIf="empresa != undefined" class="w-full">
+  <h3>Detalle de la compra</h3>
+
+  <div>
+    <button type="button" class="mt-2" (click)="null" mat-raised-button color="primary">Agregar item</button>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" matSort class="w-full mt-2">
+
+    <ng-container matColumnDef="codigo">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header >Codigo</th>
+      <td mat-cell *matCellDef="let element">{{element.producto.codigo}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header >Nombre</th>
+      <td mat-cell *matCellDef="let element">{{element.producto.nombre}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="cantidad">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header >Cantidad</th>
+      <td mat-cell *matCellDef="let element">
+
+        <mat-form-field class="w-full" appearance="fill">
+          <mat-label>Cantidad</mat-label>
+          <input type="number" step="1" matInput placeholder="Ingrese la cantidad">
+        </mat-form-field>
+
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="perecedero">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header >Perecedero</th>
+      <td mat-cell *matCellDef="let element">{{element.producto.perecedero ? 'Si' : 'No'}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="fechaVenc">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header >Fecha venc..</th>
+      <td mat-cell *matCellDef="let element">
+        <span *ngIf="element.fechaVenc != undefined">
+          {{element.fechaVenc | date:'d/M/yyy'}}
+        </span>
+        <span *ngIf="element.fechaVenc == undefined">
+          No vence
+        </span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="precioVenta">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header >precio de venta</th>
+      <td mat-cell *matCellDef="let element">{{element.precioVenta | currency:'USD':'symbol-narrow':'1.2-2'}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="options">
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+      <td mat-cell *matCellDef="let element let i = index">
+
+        <button type="button" (click)="null" mat-raised-button color="warn">Eliminar</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+
+</div>

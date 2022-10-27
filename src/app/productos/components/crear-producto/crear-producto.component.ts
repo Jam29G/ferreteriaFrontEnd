@@ -63,7 +63,9 @@ export class CrearProductoComponent implements OnInit {
 
     if(control?.hasError('minlength')) return "El descuento debe tener un minimo de 6 caracteres";
 
-    if(control?.hasError('max')) return "El descuento maximo es 1";
+    if(control?.hasError('max')) return "El descuento maximo es 100%";
+
+    if(control?.hasError('min')) return "El descuento minimo es 0%";
 
     if(control?.hasError('maxlength')) return "El maximo de caracteres es 120";
 
@@ -105,7 +107,7 @@ export class CrearProductoComponent implements OnInit {
   form: FormGroup = this.fb.group({
     codigo: ['', [ Validators.required, Validators.minLength(6), Validators.maxLength(6) ] ],
     nombre: ['', [ Validators.required, Validators.minLength(3), Validators.maxLength(80) ] ],
-    descuento: ['', [ Validators.required, Validators.max(1) ] ],
+    descuento: ['', [ Validators.required, Validators.max(100), Validators.min(0) ] ],
     descripcion: ['', [Validators.required, Validators.maxLength(244)] ],
     perecedero: ['false', [Validators.required] ],
   });
@@ -133,7 +135,7 @@ export class CrearProductoComponent implements OnInit {
     let producto: Producto = {
       codigo:       this.form.get('codigo')?.value,
       nombre:       this.form.get('nombre')?.value,
-      descuentoMax: this.form.get('descuento')?.value,
+      descuentoMax: (this.form.get('descuento')?.value / 100),
       descripcion:  this.form.get('descripcion')?.value,
       isPerecedero: this.form.get('perecedero')?.value,
       estado:       true,

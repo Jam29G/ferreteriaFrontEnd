@@ -58,7 +58,7 @@ export class UpdateProductoComponent implements OnInit {
   imageBase: string = "http://localhost:8080/api/productos/image";
 
   form: FormGroup = this.fb.group({
-    descuento: [this.data.descuentoMax, [ Validators.required, Validators.max(1) ] ],
+    descuento: [(this.data.descuentoMax * 100), [ Validators.required, Validators.max(1) ] ],
     descripcion: [this.data.descripcion, [Validators.required, Validators.maxLength(244)] ],
   });
   

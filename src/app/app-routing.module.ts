@@ -41,6 +41,12 @@ const routes: Routes = [
     canLoad: [AuthRequiredGuard]
   },
   {
+    path: "compras",
+    loadChildren: () => import('./compras/compras.module').then(m => m.ComprasModule),
+    canActivate: [AuthRequiredGuard],
+    canLoad: [AuthRequiredGuard]
+  },
+  {
     path: '**',
     redirectTo: ''
   }
