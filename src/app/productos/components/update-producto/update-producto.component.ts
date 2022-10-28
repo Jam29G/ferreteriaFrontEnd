@@ -23,7 +23,7 @@ export class UpdateProductoComponent implements OnInit {
 
     if(control?.hasError('minlength')) return "El descuento debe tener un minimo de 6 caracteres";
 
-    if(control?.hasError('max')) return "El descuento maximo es 1";
+    if(control?.hasError('max')) return "El descuento maximo es 100";
 
     if(control?.hasError('maxlength')) return "El maximo de caracteres es 120";
 
@@ -58,7 +58,7 @@ export class UpdateProductoComponent implements OnInit {
   imageBase: string = "http://localhost:8080/api/productos/image";
 
   form: FormGroup = this.fb.group({
-    descuento: [(this.data.descuentoMax * 100), [ Validators.required, Validators.max(1) ] ],
+    descuento: [(this.data.descuentoMax * 100), [ Validators.required, Validators.max(100) ] ],
     descripcion: [this.data.descripcion, [Validators.required, Validators.maxLength(244)] ],
   });
   
@@ -84,7 +84,7 @@ export class UpdateProductoComponent implements OnInit {
 
     let producto: Producto = this.data;
 
-    producto.descuentoMax = this.form.get('descuento')?.value;
+    producto.descuentoMax = this.form.get('descuento')?.value / 100;
     producto.descripcion = this.form.get('descripcion')?.value;
 
 

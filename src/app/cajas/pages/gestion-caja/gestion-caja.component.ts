@@ -22,10 +22,10 @@ export class GestionCajaComponent implements OnInit {
 
   //Datatable
   //Datatable
-  ingresosDisplayedColumns: string[] = ['motivo', 'monto', 'fecha', 'caja', 'usuario', 'venta'];
+  ingresosDisplayedColumns: string[] = ['motivo', 'monto', 'fecha', 'caja', 'usuario'];
   ingresosCajaDataSource!: MatTableDataSource<MovimCaja>;
 
-  egresosDisplayedColumns: string[] = ['motivo', 'monto', 'fecha', 'caja', 'usuario', 'venta'];
+  egresosDisplayedColumns: string[] = ['motivo', 'monto', 'fecha', 'caja', 'usuario'];
   egresosCajaDataSource!: MatTableDataSource<MovimCaja>;
 
   @ViewChild('ingrPag') ingresoPaginator!: MatPaginator;

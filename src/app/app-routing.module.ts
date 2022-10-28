@@ -47,6 +47,12 @@ const routes: Routes = [
     canLoad: [AuthRequiredGuard]
   },
   {
+    path: "ventas",
+    loadChildren: () => import('./ventas/ventas.module').then(m => m.VentasModule),
+    canActivate: [AuthRequiredGuard],
+    canLoad: [AuthRequiredGuard]
+  },
+  {
     path: '**',
     redirectTo: ''
   }

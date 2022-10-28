@@ -44,6 +44,12 @@ export class AddItemComponent implements OnInit {
     this.detalleService.getByEmpresa(this.data.empresa.id!, true).subscribe({
 
       next: detalles => {
+
+        detalles.forEach((el, index) => {
+          if(el.is_perecedero && el.cantidad != undefined) {
+            detalles.splice(index, 1);
+          }
+        })
   
         this.data.detallesProd.forEach(el => {
           let index = detalles.findIndex(el2 => el2.id! == el.id!);

@@ -1,0 +1,72 @@
+<h2>Ver compras</h2>
+
+<div class="table">
+  <h3>Lista de compras</h3>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Buscar</mat-label>
+    <input autocomplete="false" matInput (keyup)="applyFilter($event)" #input>
+  </mat-form-field>
+
+  <div>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Filtrar por rango de fecha</mat-label>
+      <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+        <input matStartDate formControlName="start" placeholder="Fecha de inicio">
+        <input matEndDate formControlName="end" placeholder="Fecha final">
+      </mat-date-range-input>
+      <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+
+    <button (click)="filterByDate()" class="ml-2 w-5rem" mat-raised-button color="primary">Filtrar</button>
+
+  </div>
+  
+  <table mat-table [dataSource]="dataSource" matSort #showSort="matSort" class="w-full">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header >ID</th>
+      <td mat-cell *matCellDef="let element">{{element.id}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="numFactura">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header >Numero de factura</th>
+      <td mat-cell *matCellDef="let element">{{element.numFactura}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="fechaCompra">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header >Fecha de compra</th>
+      <td mat-cell *matCellDef="let element">{{element.fechaCompra | date:'d/M/yyy, h:mm:ss a'}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="monto">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header >Monto</th>
+      <td mat-cell *matCellDef="let element">
+        {{element.monto | currency:'USD':'symbol-narrow':'1.2-2'}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="usuario">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header >Usuario</th>
+      <td mat-cell *matCellDef="let element">
+        {{element.usuario.username}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="options">
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+      <td mat-cell *matCellDef="let element let i = index">
+        <button (click)="showDetalles(element.id)" mat-raised-button class="mr-2">Detalles</button>
+      </td>
+    </ng-container>
+  
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator #showPag [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+
+</div>

@@ -19,6 +19,26 @@ export class DetallesService {
     private authService: AuthService
   ) { }
 
+  getAll(): Observable<DetalleProducto[]> {
+    const url = `${this.base_url}/detalleProducto`;
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    })
+
+    return this.http.get<DetalleProducto[]>(url, {headers});
+  }
+
+  getByFilter(filter: string): Observable<DetalleProducto[]> {
+    const url = `${this.base_url}/detalleProducto/find/${filter}`;
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    })
+
+    return this.http.get<DetalleProducto[]>(url, {headers});
+  }
+
 
   getByProductoId(id: number, estado: boolean): Observable<DetalleProducto[]> {
     const url = `${this.base_url}/detalleProducto/productos/${id}?estado=${estado}`;

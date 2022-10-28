@@ -1,0 +1,79 @@
+<div class="w-full">
+  <h3>Agregar a la venta</h3>
+  <div>
+    <mat-form-field appearance="standard">
+      <mat-label>Buscar</mat-label>
+      <input autocomplete="false" matInput (keyup)="applyFilter($event)" #input>
+    </mat-form-field>
+  </div>
+
+  <div class="table">
+    <table mat-table [dataSource]="dataSource" matSort class="w-full mt-2">
+
+      <ng-container matColumnDef="codigo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header >Codigo</th>
+        <td mat-cell *matCellDef="let element">{{element.producto.codigo}}</td>
+        
+      </ng-container>
+  
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header >Nombre</th>
+        <td mat-cell *matCellDef="let element">{{element.producto.nombre}}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="cantidad">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header >Cantidad en inv...</th>
+
+        <td mat-cell *matCellDef="let element">{{element.cantidad}}</td>
+  
+      </ng-container>
+
+      <ng-container matColumnDef="descuento">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header >Descuento maximo</th>
+
+        <td mat-cell *matCellDef="let element">{{element.producto.descuentoMax | percent}}</td>
+      </ng-container>
+  
+  
+      <ng-container matColumnDef="precioVenta">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header >precio de venta</th>
+        <td mat-cell *matCellDef="let element">{{element.precioVenta | currency:'USD':'symbol-narrow':'1.2-2'}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="perecedero">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header >Perecedero</th>
+        <td mat-cell *matCellDef="let element">{{element.producto.isPerecedero ? 'Si' : 'No'}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="fechaVenc">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header >Fecha venc..</th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="element.fechaVenc != undefined">
+            {{element.fechaVenc | date:'d/M/yyy'}}
+          </span>
+          <span *ngIf="element.fechaVenc == undefined">
+            No vence
+          </span>
+        </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="options">
+        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+        <td mat-cell *matCellDef="let element let i = index">
+          <mat-checkbox [checked]="verifyChecked(element.id)" (change)="edit(element.id, $event)">Añadir</mat-checkbox>
+          
+        </td>
+      </ng-container>
+
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    <div class="mt-4">
+      <button class="mr-2" (click)="AddVenta()" mat-raised-button color="primary">Agregar a la compra</button>
+      <button (click)="close()" mat-raised-button color="warn">Cancelar</button>
+    </div>
+  </div>
+</div>

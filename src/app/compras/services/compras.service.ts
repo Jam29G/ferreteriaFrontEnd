@@ -18,6 +18,27 @@ export class ComprasService {
     private authService: AuthService
   ) { }
 
+
+  getTodayCompras(date: string): Observable<Compra[]> {
+    const url = `${this.base_url}/compra/date?fecha=${date}`;
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    })
+
+    return this.http.get<Compra[]>(url, {headers});
+  }
+
+  getComprasByRangeDate(start: string, end: string) {
+    const url = `${this.base_url}/compra/rangeDate?fechaInicio=${start}&fechaFin=${end}`;
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    })
+
+    return this.http.get<Compra[]>(url, {headers});
+  }
+
   create(compra: Compra): Observable<Compra> {
     const url = `${this.base_url}/compra`;
 

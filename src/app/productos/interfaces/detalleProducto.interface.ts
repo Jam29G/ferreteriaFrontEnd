@@ -14,6 +14,7 @@ export interface DetalleProducto {
   producto:      Producto;
   cantidadVP?: number;
   importe?: number;
+  descuento?: number;
   
 }
 

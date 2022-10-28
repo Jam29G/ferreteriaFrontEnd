@@ -14,6 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddItemComponent } from '../../components/add-item/add-item.component';
 import { DetalleCompra, Compra } from '../../interfaces/compra.interface';
 import { ComprasService } from '../../services/compras.service';
+import { AuthService } from '../../../auth/services/auth.service';
 
 interface dataDialog {
   empresa: Empresa;
@@ -41,11 +42,11 @@ export class CrearCompraComponent implements OnInit {
     const control = this.form.get('numFactura');
 
     if(control?.hasError('required')) {
-      return "la factura es requerida";
+      return "el numero de factura es requerida";
     }
 
     if(control?.hasError('pattern')) {
-      return "La factura solo puede tener letras y numeros";
+      return "el numero de factura solo puede tener letras y numeros";
     }
     return "";
   }
@@ -75,7 +76,8 @@ export class CrearCompraComponent implements OnInit {
     private compraService: ComprasService,
     private vs: ValidatorService,
     private fb: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private authService: AuthService
   ) { }
 
 
@@ -262,7 +264,8 @@ export class CrearCompraComponent implements OnInit {
       numFactura:    this.form.get("numFactura")?.value,
       monto:         this.monto,
       empresa:       this.empresa!,
-      detalleCompra: detallesCompra
+      detalleCompra: detallesCompra,
+      usuario: {id: this.authService.auth?.id!}
     }
 
     

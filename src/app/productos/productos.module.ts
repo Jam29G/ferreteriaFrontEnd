@@ -18,6 +18,8 @@ import { UpdateProductoComponent } from './components/update-producto/update-pro
 import { AdmDetalleProductoComponent } from './pages/adm-detalle-producto/adm-detalle-producto.component';
 import { AddDetalleProdComponent } from './components/detalle/add-detalle-prod/add-detalle-prod.component';
 import { EditDetalleProdComponent } from './components/detalle/edit-detalle-prod/edit-detalle-prod.component';
+import { BuscarProductosComponent } from './pages/buscar-productos/buscar-productos.component';
+import { ShowDetailProductosComponent } from './components/show-detail-productos/show-detail-productos.component';
 
 
 @NgModule({
@@ -35,6 +37,8 @@ import { EditDetalleProdComponent } from './components/detalle/edit-detalle-prod
     AdmDetalleProductoComponent,
     AddDetalleProdComponent,
     EditDetalleProdComponent,
+    BuscarProductosComponent,
+    ShowDetailProductosComponent,
   ],
   imports: [
     CommonModule,

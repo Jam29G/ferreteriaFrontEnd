@@ -4,6 +4,7 @@ import { HomeProductosComponent } from './pages/home-productos/home-productos.co
 import { UbicacionesComponent } from './pages/ubicaciones/ubicaciones.component';
 import { AdmProductosComponent } from './pages/adm-productos/adm-productos.component';
 import { AdmDetalleProductoComponent } from './pages/adm-detalle-producto/adm-detalle-producto.component';
+import { BuscarProductosComponent } from './pages/buscar-productos/buscar-productos.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
       {
         path: "admDetalles",
         component: AdmDetalleProductoComponent
+      },
+      {
+        path: "verProductos",
+        component: BuscarProductosComponent
       }
     ]
   }

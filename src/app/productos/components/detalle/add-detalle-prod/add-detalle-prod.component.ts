@@ -71,16 +71,7 @@ export class AddDetalleProdComponent implements OnInit {
       let precioCompra: number = this.form.get("precioCompra")?.value;
       let precioVenta: number = this.form.get("precioVenta")?.value;
 
-      if(precioCompra > precioVenta) {
-        Swal.fire({
-          position: 'center',
-          icon: 'error',
-          title: 'El precio de compra no puede ser mayor al precio de venta',
-          showConfirmButton: false,
-          timer: 2800
-        })
-        return
-      }
+      console.log(`Precio venta: ${precioVenta} precio compra: ${precioCompra}`);
 
       let productoDetailNew: DetalleProducto = {
         precioCompra:  precioCompra,
@@ -118,18 +109,6 @@ export class AddDetalleProdComponent implements OnInit {
       let precioCompra: number = this.formPer.get("precioCompra")?.value;
       let precioVenta: number = this.formPer.get("precioVenta")?.value;
       let fechaVenc: Date = this.formPer.get("fechaVenc")?.value;
-
-      if(precioCompra > precioVenta) {
-      
-        Swal.fire({
-          position: 'center',
-          icon: 'error',
-          title: 'El precio de compra no puede ser mayor al precio de venta',
-          showConfirmButton: false,
-          timer: 2800
-        })
-        return
-      }
 
       if(fechaVenc <= nowDate) {
         Swal.fire({

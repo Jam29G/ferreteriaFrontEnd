@@ -142,8 +142,14 @@ export class AdmDetalleProductoComponent implements OnInit {
   }
 
   applyFilter(event: any) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
 
-  }
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+      
+    }
+  } 
 
   add() {
     const dialogRef = this.dialog.open(AddDetalleProdComponent, {

@@ -97,7 +97,25 @@ export class SidenavComponent implements OnInit {
           icon: "label",
           link: "/productos/ubicaciones"
         },
+        {
+          label: "Ver productos",
+          icon: "label",
+          link: "/productos/verProductos"
+        },
         
+      ]
+    },
+    {
+      label: "Ventas",
+      icon: "store_front",
+      link: "",
+      id: "ventas",
+      children: [
+        {
+          label: "Crear venta",
+          icon: "label",
+          link: "/ventas/crear"
+        },
       ]
     },
     {
@@ -110,6 +128,11 @@ export class SidenavComponent implements OnInit {
           label: "Crear compra",
           icon: "label",
           link: "/compras/crear"
+        },
+        {
+          label: "Ver compras",
+          icon: "label",
+          link: "/compras/verCompras"
         },
       ]
     },

@@ -1,3 +1,4 @@
+import { Role } from 'src/app/usuarios/interface/usuario.interface';
 import { Empresa } from '../../empresas/interfaces/empresa.interface';
 import { DetalleProducto } from '../../productos/interfaces/detalleProducto.interface';
 export interface Compra {
@@ -7,6 +8,7 @@ export interface Compra {
   monto:         number;
   empresa:       Empresa;
   detalleCompra: DetalleCompra[];
+  usuario: Usuario;
 }
 
 export interface DetalleCompra {
@@ -14,6 +16,16 @@ export interface DetalleCompra {
   precio:          number;
   cantidad:        number;
   detalleProducto: DetalleProducto;
+}
+
+export interface Usuario {
+  id:       number;
+  nombre?:   string;
+  apellido?: string;
+  username?: string;
+  password?: string;
+  estado?:   boolean;
+  roles?:    Role[];
 }
 
 

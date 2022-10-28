@@ -114,8 +114,8 @@ export class AdmProductosComponent implements OnInit {
           next: res => {
             if(res !== undefined) {
               let updateProd = res;
-              let index = this.productos.findIndex(el => el.id! = id);
-    
+              let index = this.productos.findIndex(el => el.id! == id);
+            
               this.productos[index] = updateProd;
               this.dataSource.data = this.productos;
     
