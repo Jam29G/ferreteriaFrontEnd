@@ -116,6 +116,11 @@ export class SidenavComponent implements OnInit {
           icon: "label",
           link: "/ventas/crear"
         },
+        {
+          label: "Ver ventas",
+          icon: "label",
+          link: "/ventas/verVentas"
+        }
       ]
     },
     {

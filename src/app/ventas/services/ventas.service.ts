@@ -27,4 +27,25 @@ export class VentasService {
 
     return this.http.post<Venta>(url, venta, {headers});
   }
+
+  getTodayVentas(date: string): Observable<Venta[]> {
+    const url = `${this.base_url}/venta/date?fecha=${date}`;
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    })
+
+    return this.http.get<Venta[]>(url, {headers});
+  }
+
+  getVentasByRangeDate(start: string, end: string) {
+    const url = `${this.base_url}/venta/rangeDate?fechaInicio=${start}&fechaFin=${end}`;
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    })
+
+    return this.http.get<Venta[]>(url, {headers});
+  }
+
 }
