@@ -29,6 +29,18 @@ export class DetallesService {
     return this.http.get<DetalleProducto[]>(url, {headers});
   }
 
+  getPerecederos(): Observable<DetalleProducto[]> {
+    const url = `http://localhost:8080/api/detalleProducto/find/caducados`;
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    })
+
+    return this.http.get<DetalleProducto[]>(url, {headers});
+  }
+
+
+
   getByFilter(filter: string): Observable<DetalleProducto[]> {
     const url = `${this.base_url}/detalleProducto/find/${filter}`;
 

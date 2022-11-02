@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { MaterialModule } from '../material/material.module';
 import { RouterModule } from '@angular/router';
@@ -23,6 +23,9 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     SidenavComponent,
     ToolbarComponent,
     HomeComponent,
+  ],
+  providers: [
+    DatePipe
   ]
 })
 export class SharedModule { }

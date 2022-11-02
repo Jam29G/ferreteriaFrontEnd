@@ -1,1 +1,50 @@
-<h1>Bienvenido de nuevo</h1>
+<div class="md:flex md:justify-content-between">
+
+  <div class="card bg-green">
+    <div class="icon-center">
+      <mat-icon aria-hidden="false" class="icon-display" fontIcon="shopping_cart
+      "></mat-icon>
+    </div>
+
+    <div class="center-text">
+      Total de ventas del dia
+    </div>
+
+    <div class="text-bold-center mt-3">
+      {{numVentas}}
+    </div>
+
+  </div>
+
+  <div class="card bg-red">
+    <div class="icon-center">
+      <mat-icon aria-hidden="false" class="icon-display" fontIcon="fmd_bad"></mat-icon>
+    </div>
+
+    <div class="center-text">
+      Productos perecederos
+    </div>
+
+    <div class="text-bold-center mt-3">
+      {{numPerecederos}}
+    </div>
+
+  </div>
+
+  <div class="card bg-blue">
+
+    <div class="icon-center">
+      <mat-icon aria-hidden="false" class="icon-display" fontIcon="fmd_bad"></mat-icon>
+    </div>
+
+    <div class="center-text">
+      Usuarios registrados
+    </div>
+
+    <div class="text-bold-center mt-3">
+      {{numUsuarios}}
+    </div>
+
+  </div>
+
+</div>

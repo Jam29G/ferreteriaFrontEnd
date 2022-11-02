@@ -5,6 +5,8 @@ import { UbicacionesComponent } from './pages/ubicaciones/ubicaciones.component'
 import { AdmProductosComponent } from './pages/adm-productos/adm-productos.component';
 import { AdmDetalleProductoComponent } from './pages/adm-detalle-producto/adm-detalle-producto.component';
 import { BuscarProductosComponent } from './pages/buscar-productos/buscar-productos.component';
+import { AuthRequiredGuard } from '../auth/guards/auth-required.guard';
+import { AuthGerenteGuard } from '../auth/guards/auth-gerente.guard';
 
 const routes: Routes = [
   {
@@ -13,15 +15,21 @@ const routes: Routes = [
     children: [
       {
         path: "ubicaciones",
-        component: UbicacionesComponent
+        component: UbicacionesComponent,
+        canActivate: [AuthGerenteGuard],
+        canLoad: [AuthGerenteGuard]
       },
       {
         path: "adm",
-        component: AdmProductosComponent
+        component: AdmProductosComponent,
+        canActivate: [AuthGerenteGuard],
+        canLoad: [AuthGerenteGuard]
       },
       {
         path: "admDetalles",
-        component: AdmDetalleProductoComponent
+        component: AdmDetalleProductoComponent,
+        canActivate: [AuthGerenteGuard],
+        canLoad: [AuthGerenteGuard]
       },
       {
         path: "verProductos",

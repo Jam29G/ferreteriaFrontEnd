@@ -14,8 +14,8 @@ const routes: Routes = [
       {
         path: 'registros',
         component: RegistroCajasComponent,
-        canActivate: [AuthGerenteGuard],
-        canLoad: [AuthGerenteGuard]
+        canActivate: [AuthGerenteGuard, AuthGerenteGuard],
+        canLoad: [AuthGerenteGuard, AuthGerenteGuard]
       },
       {
         path: 'gestion',

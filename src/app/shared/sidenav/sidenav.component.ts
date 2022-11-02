@@ -32,7 +32,20 @@ export class SidenavComponent implements OnInit {
 
   usuario: UsuarioLogin | undefined;
 
-  menuItems: menu[] = [
+  get menu(): menu[] {
+
+    if(this.authService.verifyRol("ROLE_ADMIN")) {
+      return this.adminItems
+    } else if(this.authService.verifyRol("ROLE_GERENTE")) {
+      return this.gerenteItems
+    } else {
+      return this.cajeroItems;
+    }
+
+
+  }
+
+  adminItems: menu[] = [
     {
       label: "Inicio",
       icon: "home",
@@ -150,6 +163,157 @@ export class SidenavComponent implements OnInit {
     
 
   ]
+
+  gerenteItems: menu[] = [
+    {
+      label: "Inicio",
+      icon: "home",
+      link: "",
+      id: "inicio"
+    },
+    {
+      label: "Cajas",
+      icon: "payment",
+      link: "",
+      id: "cajas",
+      children: [
+        {
+          label: "Aprobacion de cajas",
+          icon: "label",
+          link: "/cajas/aprobaciones"
+        },
+        {
+          label: "Gestionar caja",
+          icon: "label",
+          link: "/cajas/gestion"
+        },
+        {
+          label: "Registros de caja",
+          icon: "label",
+          link: "/cajas/registros"
+        },
+      ]
+    },
+    {
+      label: "Productos",
+      icon: "inventory2",
+      link: "",
+      id: "productos",
+      children: [
+        {
+          label: "Administrar productos",
+          icon: "label",
+          link: "/productos/adm"
+        },
+        {
+          label: "Administrar detalles de productos",
+          icon: "label",
+          link: "/productos/admDetalles"
+        },
+        {
+          label: "Ubicaciones de productos",
+          icon: "label",
+          link: "/productos/ubicaciones"
+        },
+        {
+          label: "Ver productos",
+          icon: "label",
+          link: "/productos/verProductos"
+        },
+        
+      ]
+    },
+    {
+      label: "Ventas",
+      icon: "store_front",
+      link: "",
+      id: "ventas",
+      children: [
+        {
+          label: "Crear venta",
+          icon: "label",
+          link: "/ventas/crear"
+        },
+      ]
+    },
+    {
+      label: "Compras",
+      icon: "shopping_cart_checkout",
+      link: "",
+      id: "compras",
+      children: [
+        {
+          label: "Crear compra",
+          icon: "label",
+          link: "/compras/crear"
+        },
+        {
+          label: "Ver compras",
+          icon: "label",
+          link: "/compras/verCompras"
+        },
+      ]
+    },
+    {
+      label: "Empresas",
+      icon: "domain",
+      link: "/empresas/adm",
+      id: "empresas"
+    },
+    
+
+  ]
+
+  cajeroItems: menu[] = [
+    {
+      label: "Inicio",
+      icon: "home",
+      link: "",
+      id: "inicio"
+    },
+    {
+      label: "Ventas",
+      icon: "store_front",
+      link: "",
+      id: "ventas",
+      children: [
+        {
+          label: "Crear venta",
+          icon: "label",
+          link: "/ventas/crear"
+        },
+      ]
+    },
+    {
+      label: "Productos",
+      icon: "inventory2",
+      link: "",
+      id: "productos",
+      children: [
+        {
+          label: "Ver productos",
+          icon: "label",
+          link: "/productos/verProductos"
+        },
+        
+      ]
+    },
+    {
+      label: "Cajas",
+      icon: "payment",
+      link: "",
+      id: "cajas",
+      children: [
+        {
+          label: "Gestionar caja",
+          icon: "label",
+          link: "/cajas/gestion"
+        },
+      ]
+    },
+  ]
+
+  
     
 
   constructor(
