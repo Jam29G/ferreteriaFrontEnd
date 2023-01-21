@@ -82,6 +82,14 @@
         <td mat-cell *matCellDef="let element">{{element.caja.usuario.username}}</td>
       </ng-container>
 
+      <ng-container matColumnDef="venta">
+        <th mat-header-cell *matHeaderCellDef >Venta</th>
+        <td mat-cell *matCellDef="let element">
+          <button *ngIf="element.venta != null" (click)="showDetalles(element.venta.id)" mat-raised-button class="mr-2">Detalles</button>
+          <span *ngIf="element.venta == null">-</span>
+        </td>
+      </ng-container>
+
 
 
       <tr mat-header-row *matHeaderRowDef="ingresosDisplayedColumns"></tr>
@@ -119,6 +127,14 @@
       <ng-container matColumnDef="usuario">
         <th mat-header-cell *matHeaderCellDef >Usuario</th>
         <td mat-cell *matCellDef="let element">{{element.caja.usuario.username}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="venta">
+        <th mat-header-cell *matHeaderCellDef >Venta</th>
+        <td mat-cell *matCellDef="let element">
+          <button *ngIf="element.venta != null" (click)="showDetalles(element.venta.id)" mat-raised-button class="mr-2">Detalles</button>
+          <span *ngIf="element.venta == null">-</span>
+        </td>
       </ng-container>
 
 

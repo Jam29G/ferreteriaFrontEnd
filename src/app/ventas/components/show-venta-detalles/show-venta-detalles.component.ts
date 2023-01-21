@@ -13,7 +13,7 @@ import { DetalleVenta, Venta } from '../../interfaces/Venta.interface';
 export class ShowVentaDetallesComponent implements OnInit {
 
   //Datatable
-  displayedColumns: string[] = ['codigo', 'nombre', 'precio', 'cantidad', 'descuento'];
+  displayedColumns: string[] = ['codigo', 'nombre', 'precio', 'cantidad', 'descuento', 'subtotal'];
   dataSource!: MatTableDataSource<DetalleVenta>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

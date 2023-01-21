@@ -1,3 +1,4 @@
+import { Venta } from '../../ventas/interfaces/Venta.interface';
 export interface MovimCaja {
   id:        number;
   motivo:    string;
@@ -5,7 +6,7 @@ export interface MovimCaja {
   monto:     number;
   fecha:     Date;
   caja:      Caja;
-  venta?:     null;
+  venta?:     Venta;
   tipo?:       string
 }
 

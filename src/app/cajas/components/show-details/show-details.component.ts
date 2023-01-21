@@ -2,11 +2,15 @@ import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { UpdateUsuarioComponent } from 'src/app/usuarios/components/update-usuario/update-usuario.component';
 import { Caja } from '../../interfaces/caja.interface';
+import Swal from 'sweetalert2';
 import { MovimCaja } from '../../interfaces/movimCaja.interface';
 import { CajasService } from '../../services/cajas.service';
+import { VentasService } from '../../../ventas/services/ventas.service';
+import { ShowVentaDetallesComponent } from '../../../ventas/components/show-venta-detalles/show-venta-detalles.component';
 
 interface Details {
   caja: Caja | undefined;
@@ -48,6 +52,8 @@ export class ShowDetailsComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<UpdateUsuarioComponent>,
     @Inject(MAT_DIALOG_DATA) public details: Details,
+    private ventasService: VentasService,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -63,6 +69,31 @@ export class ShowDetailsComponent implements OnInit {
 
   close() {
     this.dialogRef.close();
+  }
+
+  showDetalles(id: number) {
+    this.ventasService.getVentaById(id).subscribe({
+      next: venta => {
+
+        this.dialog.open(ShowVentaDetallesComponent, {
+          panelClass: 'dialog-responsive-xl',
+          data: venta
+        })
+
+      },
+      error: err => {
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: `Error al obtener la venta` ,
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
+    });
+
+    
+
   }
 
 }

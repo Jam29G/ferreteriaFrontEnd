@@ -13,6 +13,7 @@ export interface Venta {
   isCredFisc:    boolean;
   montoFinal:    number;
   cambio:        number;
+  pago:          number; 
   usuario:       Usuario;
   caja:          Caja;
   detalleVentas: DetalleVenta[];

@@ -50,7 +50,7 @@ export class CrearVentaComponent implements OnInit {
     pago: ['0', [Validators.required,  Validators.min(0.01) ]],
     direccion: ['', [ Validators.minLength(6), Validators.maxLength(180) ] ],
     departamento: ['', [Validators.minLength(6), Validators.maxLength(80), Validators.pattern(this.vs.onlyLetters)] ],
-    numRegistro: ['', [Validators.minLength(6), Validators.maxLength(18), Validators.pattern(this.vs.onlyNumbersandguion)] ],
+    numRegistro: ['', [Validators.required]],
     giro: ['', [Validators.minLength(3), Validators.maxLength(60), Validators.pattern(this.vs.onlyLetters)] ],
     cantidades: this.fb.group({
       
@@ -161,6 +161,7 @@ export class CrearVentaComponent implements OnInit {
             el.importe = 0;
             el.descuento = 0;
             this.detallesProd.push(el);
+            
             this.cantidadesGroup.addControl(el.id!.toString(), new FormControl('', [Validators.required, Validators.max(el.cantidad!), Validators.min(1) ]) )
 
             this.descuentosGroup.addControl( "desc" + el.id!, new FormControl('0', [Validators.required, Validators.max(el.producto.descuentoMax * 100)]) )
@@ -194,12 +195,14 @@ export class CrearVentaComponent implements OnInit {
   }
 
   sendVenta() {
-
+    
     this.form.markAllAsTouched();
 
     if(this.form.invalid) {
       return
     }
+
+    
 
     if(this.monto > this.pago) {
       Swal.fire({
@@ -234,6 +237,7 @@ export class CrearVentaComponent implements OnInit {
       numFactura: this.form.get('numFactura')?.value,
       isCredFisc: false,
       montoFinal: this.monto,
+      pago: this.pago,
       cambio: this.pago - this.monto,
       usuario: {id: this.authService.auth?.id!},
       caja: {id: this._caja?.id!},
@@ -268,7 +272,7 @@ export class CrearVentaComponent implements OnInit {
           icon: 'error',
           title: `Error al registrar la venta: ${err.error.message}` ,
           showConfirmButton: false,
-          timer: 1500
+          timer: 2500
         })
       }
     })
@@ -309,7 +313,7 @@ export class CrearVentaComponent implements OnInit {
       this.form.get("departamento")?.addValidators([Validators.required, Validators.minLength(6), Validators.maxLength(80), Validators.pattern(this.vs.onlyLetters)]);
       this.form.get("departamento")?.updateValueAndValidity();
 
-      this.form.get("numRegistro")?.addValidators([Validators.required, Validators.minLength(6), Validators.maxLength(6), Validators.pattern(this.vs.onlyNumbersandguion)]);
+      this.form.get("numRegistro")?.addValidators([Validators.required]);
       this.form.get("numRegistro")?.updateValueAndValidity();
 
       this.form.get("giro")?.addValidators([Validators.required, Validators.minLength(3), Validators.maxLength(60), Validators.pattern(this.vs.onlyLetters)]);

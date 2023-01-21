@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ValidatorService } from 'src/app/shared/validator/validator.service';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { Producto } from '../../interfaces/producto.interface';
 import { ProductoService } from '../../services/producto.service';
@@ -55,7 +56,7 @@ export class UpdateProductoComponent implements OnInit {
 
   img: File | undefined;
 
-  imageBase: string = "http://localhost:8080/api/productos/image";
+  imageBase: string = `${environment.base_url}/api/productos/image`;
 
   form: FormGroup = this.fb.group({
     descuento: [(this.data.descuentoMax * 100), [ Validators.required, Validators.max(100) ] ],

@@ -18,6 +18,16 @@ export class VentasService {
     private authService: AuthService
   ) { }
 
+  getVentaById(id: number): Observable<Venta> {
+    const url = `${this.base_url}/venta/${id}`;
+
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    })
+
+    return this.http.get<Venta>(url, {headers});
+  }
+
   create(venta: Venta): Observable<Venta> {
     const url = `${this.base_url}/venta`;
 

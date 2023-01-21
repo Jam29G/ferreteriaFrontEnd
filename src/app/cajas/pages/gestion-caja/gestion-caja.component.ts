@@ -11,6 +11,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MovimCaja } from '../../interfaces/movimCaja.interface';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { ShowVentaDetallesComponent } from '../../../ventas/components/show-venta-detalles/show-venta-detalles.component';
+import { VentasService } from '../../../ventas/services/ventas.service';
 
 
 @Component({
@@ -22,10 +24,10 @@ export class GestionCajaComponent implements OnInit {
 
   //Datatable
   //Datatable
-  ingresosDisplayedColumns: string[] = ['motivo', 'monto', 'fecha', 'caja', 'usuario'];
+  ingresosDisplayedColumns: string[] = ['motivo', 'monto', 'fecha', 'caja', 'usuario', 'venta'];
   ingresosCajaDataSource!: MatTableDataSource<MovimCaja>;
 
-  egresosDisplayedColumns: string[] = ['motivo', 'monto', 'fecha', 'caja', 'usuario'];
+  egresosDisplayedColumns: string[] = ['motivo', 'monto', 'fecha', 'caja', 'usuario', 'venta'];
   egresosCajaDataSource!: MatTableDataSource<MovimCaja>;
 
   @ViewChild('ingrPag') ingresoPaginator!: MatPaginator;
@@ -50,6 +52,7 @@ export class GestionCajaComponent implements OnInit {
     private authService: AuthService,
     private cajaService: CajasService,
     private usuarioService: UsuariosService,
+    private ventaService: VentasService,
   ) { }
 
   ngOnInit(): void {
@@ -262,6 +265,31 @@ export class GestionCajaComponent implements OnInit {
         this.egresosCajaDataSource.data = this.egresoRegistros;
       }
     })
+  }
+
+  showDetalles(id: number) {
+    this.ventaService.getVentaById(id).subscribe({
+      next: venta => {
+
+        this.dialog.open(ShowVentaDetallesComponent, {
+          panelClass: 'dialog-responsive-xl',
+          data: venta
+        })
+
+      },
+      error: err => {
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: `Error al obtener la venta` ,
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
+    });
+
+    
+
   }
 
 }
