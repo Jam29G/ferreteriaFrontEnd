@@ -109,8 +109,8 @@ export class DetallesService {
     return this.http.put<DetalleProducto>(url, detalleProducto, {headers});
   }
 
-  updateCantidad(detalleProducto: DetalleProducto, id: number): Observable<DetalleProducto> {
-    const url = `${this.base_url}/detalleProducto/updateCantidad/${id}`;
+  updateCantidad(detalleProducto: DetalleProducto, id: number, usuarioId: number): Observable<DetalleProducto> {
+    const url = `${this.base_url}/detalleProducto/updateCantidad/${id}/${usuarioId}`;
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.token}`
     })
