@@ -97,6 +97,7 @@ export class ShowVentasComponent implements OnInit {
     this.ventasService.getVentasByRangeDate(startStr!, endStr!).subscribe({
       next: ventas => {
         this.ventas = ventas;
+        this.calculateGanancias();
         this.dataSource.data = this.ventas;
       },
       error: err => {
