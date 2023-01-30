@@ -57,6 +57,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
   
 
   ngOnInit(): void {
+    if(this.authService.auth != undefined) {
+      this.authService.logout();
+      window.location.reload();
+    }
   }
 
   ngAfterViewInit() {

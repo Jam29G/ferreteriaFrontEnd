@@ -1,0 +1,27 @@
+<h2>Actualizar cantidad del producto: {{data.detalle.producto.nombre}}</h2>
+
+<form autocomplete="off" [formGroup]="form" (ngSubmit)="submitForm()" class="w-full">
+
+  <div class="mb-3 mb-3 md:flex md:justify-content-between">
+
+    <div class="md:w-full md:mr-2">
+      <mat-form-field class="w-full" appearance="fill">
+        <mat-label>Cantidad</mat-label>
+        <input formControlName="cantidad" type="number" matInput placeholder="Cantidad">
+  
+        <mat-error 
+          *ngIf="invalidField('cantidad')"
+        >
+          {{cantidadError}}
+        </mat-error>
+  
+      </mat-form-field>
+    </div>
+
+  </div>
+
+  <div>
+    <button type="submit" mat-raised-button color="primary" class="mr-2 w-7rem">Guardar</button>
+    <button type="button" (click)="close()" mat-raised-button class="w-7rem" color="warn">Cerrar</button>
+  </div>
+</form>

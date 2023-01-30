@@ -53,6 +53,12 @@ const routes: Routes = [
     canLoad: [AuthRequiredGuard]
   },
   {
+    path: "inventario",
+    loadChildren: () => import("./inventario/inventario.module").then(m => m.InventarioModule),
+    canActivate: [AuthRequiredGuard],
+    canLoad: [AuthRequiredGuard]
+  },
+  {
     path: '**',
     redirectTo: ''
   }

@@ -50,7 +50,7 @@ export class CrearVentaComponent implements OnInit {
     pago: ['0', [Validators.required,  Validators.min(0.01) ]],
     direccion: ['', [ Validators.minLength(6), Validators.maxLength(180) ] ],
     departamento: ['', [Validators.minLength(6), Validators.maxLength(80), Validators.pattern(this.vs.onlyLetters)] ],
-    numRegistro: ['', [Validators.required]],
+    numRegistro: ['', []],
     giro: ['', [Validators.minLength(3), Validators.maxLength(60), Validators.pattern(this.vs.onlyLetters)] ],
     cantidades: this.fb.group({
       

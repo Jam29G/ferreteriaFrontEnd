@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { Venta } from '../../interfaces/Venta.interface';
 import { VentasService } from '../../services/ventas.service';
 import { ShowVentaDetallesComponent } from '../../components/show-venta-detalles/show-venta-detalles.component';
+import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-show-ventas',
@@ -25,6 +26,12 @@ export class ShowVentasComponent implements OnInit {
     
   });
 
+  get ganancias(): number {
+    return this._ganancias;
+  }
+
+  private _ganancias: number = 0;
+
   displayedColumns: string[] = ['id', 'numFactura', 'cliente', 'fecha', 'usuario', 'monto', 'options'];
   dataSource!: MatTableDataSource<Venta>;
   @ViewChild("showPag") paginator!: MatPaginator;
@@ -33,7 +40,8 @@ export class ShowVentasComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private ventasService: VentasService,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    public authService: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -50,6 +58,8 @@ export class ShowVentasComponent implements OnInit {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
 
+        this.calculateGanancias();
+
       },
       error: err => {
         Swal.fire({
@@ -57,7 +67,7 @@ export class ShowVentasComponent implements OnInit {
           icon: 'error',
           title: 'Error al obtener las ventas: ' + + err.error.message,
           showConfirmButton: false,
-          timer: 1500
+          timer: 2800
         })
       }
     })
@@ -110,6 +120,19 @@ export class ShowVentasComponent implements OnInit {
       this.dataSource.paginator.firstPage();
       
     }
+  }
+
+  calculateGanancias() {
+    this._ganancias = 0;
+    this.ventas.forEach(el => {
+      let totalCompra: number = 0;
+
+      el.detalleVentas.forEach(detalle => {
+        totalCompra = detalle.precioCompra * detalle.cantidad;
+      })
+      this._ganancias += el.montoFinal - totalCompra;
+
+    })
   }
 
 }

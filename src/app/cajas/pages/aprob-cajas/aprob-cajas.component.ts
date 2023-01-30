@@ -9,6 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ShowDetailsComponent } from '../../components/show-details/show-details.component';
 import { switchMap } from 'rxjs';
 import { MovimCaja } from '../../interfaces/movimCaja.interface';
+import { DetallesService } from '../../../productos/services/detalles.service';
 
 interface Details {
   caja: Caja | undefined;
@@ -33,7 +34,7 @@ export class AprobCajasComponent implements OnInit {
 
   constructor(
     private cajaService: CajasService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -45,6 +46,7 @@ export class AprobCajasComponent implements OnInit {
         this.dataSource.sort = this.sort;
       },
       error: err => {
+        
         Swal.fire({
           position: 'top-end',
           icon: 'error',

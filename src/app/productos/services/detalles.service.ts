@@ -30,7 +30,7 @@ export class DetallesService {
   }
 
   getPerecederos(): Observable<DetalleProducto[]> {
-    const url = `http://localhost:8080/api/detalleProducto/find/caducados`;
+    const url = `${this.base_url}/detalleProducto/find/caducados`;
 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.token}`
@@ -81,6 +81,14 @@ export class DetallesService {
     return this.http.get<DetalleProducto>(url, {headers});
   }
 
+  checkPerecederos(): Observable<boolean> {
+    const url = `${this.base_url}/detalleProducto/checkPerecederos`;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    })
+    return this.http.get<boolean>(url, {headers})
+  }
+
   create(detalleProducto: DetalleProducto): Observable<DetalleProducto> {
     const url = `${this.base_url}/detalleProducto`;
 
@@ -98,6 +106,14 @@ export class DetallesService {
       'Authorization': `Bearer ${this.token}`
     })
 
+    return this.http.put<DetalleProducto>(url, detalleProducto, {headers});
+  }
+
+  updateCantidad(detalleProducto: DetalleProducto, id: number): Observable<DetalleProducto> {
+    const url = `${this.base_url}/detalleProducto/updateCantidad/${id}`;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    })
     return this.http.put<DetalleProducto>(url, detalleProducto, {headers});
   }
 

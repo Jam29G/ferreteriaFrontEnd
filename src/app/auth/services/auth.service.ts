@@ -72,6 +72,12 @@ export class AuthService {
     return true;
   }
 
+  public tokenExpired(token: string) {
+    const expiry = (JSON.parse(window.atob(token.split('.')[1]))).exp;
+    return (Math.floor((new Date).getTime() / 1000)) >= expiry;
+  }
+  
+
   logout() {
     this._auth = undefined;
     localStorage.removeItem("auth");

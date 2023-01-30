@@ -31,7 +31,18 @@ export class AddToVentaComponent implements OnInit {
   ngOnInit(): void {
 
     this.detalleService.getAll().subscribe({
-      next: detalles => {
+      next: detallesF => {
+
+        let detalles: DetalleProducto[] = [];
+
+        detallesF.forEach((el, index) => {
+          
+          if(!el.isVencido && el.cantidad != null) {
+            detalles.push(detallesF[index]);
+
+          }
+
+        })
 
         this.data.forEach(el => {
           let index = detalles.findIndex(el2 => el2.id! == el.id!);

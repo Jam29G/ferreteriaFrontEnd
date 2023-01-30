@@ -24,6 +24,11 @@ export class AuthRequiredGuard implements CanActivate, CanLoad {
 
       this.router.navigate(['./auth/login']);
       return false
+    } else {
+      if(this.authService.tokenExpired(this.authService.auth.token)) {
+        this.router.navigate(['./auth/login'])
+        return false
+      }
     }
       
     return true;
@@ -46,6 +51,11 @@ export class AuthRequiredGuard implements CanActivate, CanLoad {
 
       this.router.navigate(['./auth/login']);
       return false
+    } else {
+      if(this.authService.tokenExpired(this.authService.auth.token)) {
+        this.router.navigate(['./auth/login'])
+        return false
+      }
     }
       
     return true;

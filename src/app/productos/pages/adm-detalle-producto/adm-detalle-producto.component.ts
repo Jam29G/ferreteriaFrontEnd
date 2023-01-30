@@ -56,6 +56,7 @@ export class AdmDetalleProductoComponent implements OnInit {
     this.productoService.getAll(true).subscribe({
       next: productos => {
         this.productos = productos;
+        console.log(productos)
         
       },
       error: err => {
@@ -98,7 +99,18 @@ export class AdmDetalleProductoComponent implements OnInit {
         this.producto = producto;
         
         this.detallesService.getByProductoId(this.producto.id!, true).subscribe({
-          next: detalles => {
+          next: detallesF => {
+
+            let detalles: DetalleProducto[] = [];
+
+            detallesF.forEach((el, index) => {
+          
+            if(!el.isVencido && el.cantidad != null) {
+              detalles.push(detallesF[index]);
+
+            }
+
+        })
             
             let detailArr: detailTable[] = [];
 
@@ -245,7 +257,7 @@ export class AdmDetalleProductoComponent implements OnInit {
   changeState(id: number, estado: boolean) {
 
     Swal.fire({
-      title: `¿Seguro que quieres deshabilitar la empresa?`,
+      title: `¿Seguro que quieres deshabilitar el detalle?`,
       showDenyButton: true,
       showCancelButton: false,
       confirmButtonText: `deshabilitar`,

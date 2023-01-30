@@ -73,4 +73,6 @@
   </table>
   <mat-paginator #showPag [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
 
+  <h2 *ngIf="authService.verifyRol('ROLE_ADMIN')">Ganancias: {{ganancias |  currency:'USD':'symbol-narrow':'1.2-2'}}</h2>
 </div>
+

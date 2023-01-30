@@ -137,6 +137,24 @@ export class SidenavComponent implements OnInit {
       ]
     },
     {
+      label: "Inventario",
+      icon: "note_text",
+      link: "",
+      id: "inventario",
+      children: [
+        {
+          label: "Agregar productos al inventario",
+          icon: "label",
+          link: "/inventario/addInventario"
+        },
+        {
+          label: "Control de inventario",
+          icon: "label",
+          link: "/inventario/inventarioView"
+        },
+      ]
+    },
+    {
       label: "Compras",
       icon: "shopping_cart_checkout",
       link: "",
@@ -233,6 +251,24 @@ export class SidenavComponent implements OnInit {
           label: "Crear venta",
           icon: "label",
           link: "/ventas/crear"
+        },
+      ]
+    },
+    {
+      label: "Inventario",
+      icon: "note_text",
+      link: "",
+      id: "inventario",
+      children: [
+        {
+          label: "Agregar productos al inventario",
+          icon: "label",
+          link: "/inventario/addInventario"
+        },
+        {
+          label: "Control de inventario",
+          icon: "label",
+          link: "/inventario/inventarioView"
         },
       ]
     },

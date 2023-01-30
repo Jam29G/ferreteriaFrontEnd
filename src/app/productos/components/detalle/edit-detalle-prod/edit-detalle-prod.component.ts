@@ -20,7 +20,7 @@ export class EditDetalleProdComponent implements OnInit {
       return "El precio de venta es requerido";
     }
 
-    if(control?.hasError('minlength')) return "precio minimo no validdo";
+    if(control?.hasError('min')) return "precio minimo no validdo";
 
 
     return "";
